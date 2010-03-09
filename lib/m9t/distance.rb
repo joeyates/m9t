@@ -5,15 +5,20 @@ require 'i18n'
 module M9t
 
   class Distance
+    DEFAULT_OPTIONS = {:units => :meters, :abbreviated => false, :precision => 5}
     KNOWN_UNITS = [:meters, :miles, :kilometers]
     METERS_PER_MILE      = 1609.344
     METERS_PER_KILOMETER = 1000.0
 
     class << self
       # Default output options
-      @@options = {:units => :meters, :abbreviated => false, :precision => 5}
+      @@options = DEFAULT_OPTIONS.clone
       def options
         @@options
+      end
+
+      def reset_options!
+        @@options = DEFAULT_OPTIONS.clone
       end
 
       # Unit convertors: convert to meters
