@@ -1,0 +1,5 @@
+# encoding: utf8
+en:
+  numbers:
+    thousands_separator: ','
+    decimal_separator: '.'
