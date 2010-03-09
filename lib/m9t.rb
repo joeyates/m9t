@@ -42,4 +42,10 @@ module M9t
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
 
+  class M9tError < StandardError
+  end
+
+  class UnitError < M9tError
+  end
+
 end

@@ -22,3 +22,12 @@ it:
           zero: miglia
           one: miglio
           other: miglia
+    direction:
+      degrees:
+        full:
+          zero: gradi
+          one: grado
+          other: gradi
+        abbreviated: °
+  direction:
+    sectors: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSO', 'SO', 'OSO', 'O', 'ONO', 'NO', 'NNO', 'N']
