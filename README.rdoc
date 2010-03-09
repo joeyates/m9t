@@ -1,0 +1,17 @@
+== m9t - Various units of measurement
+
+This package aims to handle the basic units of measure:
+* Distance
+* Temperature
+* Direction
+* Speed
+
+The emphasis is on:
+* coherent interface
+* ease of translation
+
+== Other Software
+
+* ruby-units
+  * doesn't handle i18n - very difficult to integrate
+  * monkey patches a lot of core classes
