@@ -15,3 +15,7 @@ The emphasis is on:
 * ruby-units
   * doesn't handle i18n - very difficult to integrate
   * monkey patches a lot of core classes
+
+== License
+
+MIT License. See the included COPYING file.
