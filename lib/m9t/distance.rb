@@ -49,7 +49,7 @@ module M9t
 
     def initialize(value, options = Distance.options.clone)
       @value, @options = value.to_f, Distance.options.merge(options)
-      raise "Unknown units '#{ @options[:units] }'" if not KNOWN_UNITS.find_index(@options[:units])
+      raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'") if not KNOWN_UNITS.find_index(@options[:units])
     end
 
     def to_s
@@ -68,7 +68,7 @@ module M9t
     end
 
     def to_miles
-      self.to_miles(@value)
+      self.class.to_miles(@value)
     end
 
   end
