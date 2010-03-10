@@ -29,5 +29,17 @@ it:
           one: grado
           other: gradi
         abbreviated: °
+    speed:
+      meters_per_second:
+        full:
+          zero: metri al second
+          one: metro al second
+          other: metri al second
+        abbreviated: m/s
+      knots:
+        full:
+          zero: nodi
+          one: nodo
+          other: nodi
   direction:
     sectors: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSO', 'SO', 'OSO', 'O', 'ONO', 'NO', 'NNO', 'N']

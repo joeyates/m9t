@@ -45,7 +45,7 @@ class TestM9tDirection < Test::Unit::TestCase
   # Instance methods
 
   def test_unknown_units
-    assert_raises(M9t::UnitError) { M9t::Direction.new('010', {:units => :foos}) }
+    assert_raises(M9t::UnitError) { M9t::Direction.new(10, {:units => :foos}) }
   end
 
   def test_to_s

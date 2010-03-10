@@ -29,5 +29,17 @@ en:
           one: degree
           other: degrees
         abbreviated: °
+    speed:
+      meters_per_second:
+        full:
+          zero: meters per second
+          one: meter per second
+          other: meters per second
+        abbreviated: m/s
+      knots:
+        full:
+          zero: knots
+          one: knot
+          other: knots
   direction:
     sectors: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', 'N']
