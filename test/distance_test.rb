@@ -6,20 +6,20 @@ require 'test/unit'
 require File.join(File.expand_path(File.dirname(__FILE__) + '/../lib'), 'm9t')
 
 class TestM9tDistance < Test::Unit::TestCase
-  
+
   def setup
     I18n.locale = :en
     M9t::Distance.reset_options!
   end
 
   # Basic use
-  def test_distance_singular
+  def test_singular
     distance = M9t::Distance.new(1, :precision => 0)
     I18n.locale = :en
     assert_equal('1 meter', distance.to_s)
   end
 
-  def test_distance_plural
+  def test_plural
     distance = M9t::Distance.new(10, :precision => 0)
     I18n.locale = :en
     assert_equal('10 meters', distance.to_s)
@@ -28,6 +28,12 @@ class TestM9tDistance < Test::Unit::TestCase
   end
 
   # Class methods
+
+  # Base class
+
+  def test_unit_name
+    assert(M9t::Distance.unit_name)
+  end
 
   # Conversion from non-SI units
   def test_kilometers
@@ -47,19 +53,19 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal(0.0003, M9t::Distance.to_kilometers(0.3))
   end
 
-  def test_distance_default_options_set
+  def test_default_options_set
     assert_not_nil(M9t::Distance.options)
   end
 
-  def test_distance_default_option_abbreviated
+  def test_default_option_abbreviated
     assert(! M9t::Distance.options[:abbreviated])
   end
 
-  def test_distance_default_option_units
+  def test_default_option_units
     assert_equal(:meters, M9t::Distance.options[:units])
   end
 
-  def test_distance_default_option_decimals
+  def test_default_option_decimals
     assert_equal(5, M9t::Distance.options[:precision])
   end
 
@@ -69,13 +75,13 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal(0.3, M9t::Distance.new(0.3).value)
   end
 
-  def test_distance_default_options_merged
+  def test_default_options_merged
     distance = M9t::Distance.new(10, {:abbreviated => true})
     assert_equal(:meters, distance.options[:units])
     assert_equal(5, distance.options[:precision])
   end
 
-  def test_distance_set_default_options_get_inherited
+  def test_set_default_options_get_inherited
     M9t::Distance.options[:precision] = 0
     distance = M9t::Distance.new(10)
     assert_equal(0, distance.options[:precision])

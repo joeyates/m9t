@@ -12,14 +12,12 @@ module M9t
     METERS_PER_SECOND_PER_KILOMETER_PER_HOUR = SECONDS_PER_HOUR / M9t::Distance::METERS_PER_KILOMETER
     METERS_PER_SECOND_PER_MILE_PER_HOUR = SECONDS_PER_HOUR / M9t::Distance::METERS_PER_MILE
 
-    class << self
-      @@options = DEFAULT_OPTIONS.clone
-      def options
-        @@options
-      end
+    include M9t::Base
 
-      def reset_options!
-        @@options = DEFAULT_OPTIONS.clone
+    class << self
+
+      def unit_name
+        'speed'
       end
 
       # Unit convertors: convert to meters per second
@@ -45,24 +43,7 @@ module M9t
 
     end
 
-    attr_reader :value, :options
     alias :to_meters_per_second :value
-
-    def initialize(value, options = Speed.options.clone)
-      @value, @options = value.to_f, Speed.options.merge(options)
-      raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'") if not KNOWN_UNITS.find_index(@options[:units])
-    end
-
-    def to_s
-      value_in_units = Speed.send("to_#{ @options[:units] }", @value)
-      localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ @options[:precision] }f"})
-
-      key = 'units.speed.' + @options[:units].to_s
-      @options[:abbreviated] ? key += '.abbreviated' : key += '.full'
-      unit = I18n.t(key, {:count => value_in_units})
-
-      "#{ localized_value }%s#{ unit }" % (@options[:abbreviated] ? '' : ' ')
-    end
 
     def to_kilometers_per_hour
       self.class.to_kilometers_per_hour(@value)

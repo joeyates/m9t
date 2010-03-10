@@ -19,9 +19,27 @@ class TestM9tDirection < Test::Unit::TestCase
 
   # Class methods
 
+  # Base class
+
+  def test_unit_name
+    assert(M9t::Direction.unit_name)
+  end
+
   def test_normalize
     assert_equal(5, M9t::Direction.normalize(725))
     assert_equal(5, M9t::Direction.normalize(-355))
+  end
+
+  def test_default_options_set
+    assert_not_nil(M9t::Direction.options)
+  end
+
+  def test_default_option_abbreviated
+    assert(! M9t::Direction.options[:abbreviated])
+  end
+
+  def test_default_option_units
+    assert_equal(:degrees, M9t::Direction.options[:units])
   end
 
   def test_to_degrees_identity
@@ -48,20 +66,20 @@ class TestM9tDirection < Test::Unit::TestCase
     assert_raises(M9t::UnitError) { M9t::Direction.new(10, {:units => :foos}) }
   end
 
-  def test_to_s
-    assert_equal '135°', M9t::Direction.new(135).to_s
-  end
-
   def test_to_s_not_abbreviated_singular
-    assert_equal '1 degree', M9t::Direction.new(1, {:abbreviated => false}).to_s
+    assert_equal '1 degree', M9t::Direction.new(1).to_s
     I18n.locale = :it
-    assert_equal '1 grado', M9t::Direction.new(1, {:abbreviated => false}).to_s
+    assert_equal '1 grado', M9t::Direction.new(1).to_s
   end
 
   def test_to_s_not_abbreviated_plural
-    assert_equal '135 degrees', M9t::Direction.new(135, {:abbreviated => false}).to_s
+    assert_equal '135 degrees', M9t::Direction.new(135).to_s
     I18n.locale = :it
-    assert_equal '135 gradi', M9t::Direction.new(135, {:abbreviated => false}).to_s
+    assert_equal '135 gradi', M9t::Direction.new(135).to_s
+  end
+
+  def test_to_s_abbreviated
+    assert_equal '135°', M9t::Direction.new(135, {:abbreviated => true}).to_s
   end
 
   def test_compass_units

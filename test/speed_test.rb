@@ -19,6 +19,12 @@ class TestM9tSpeed < Test::Unit::TestCase
 
   # Class methods
 
+  # Base class
+
+  def test_unit_name
+    assert(M9t::Speed.unit_name)
+  end
+
   def test_class_miles_per_hour
     assert_equal(45, M9t::Speed.miles_per_hour(20.1168))
   end

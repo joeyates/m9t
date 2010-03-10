@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'base')
 
 module M9t
 
@@ -10,15 +11,12 @@ module M9t
     METERS_PER_MILE      = 1609.344
     METERS_PER_KILOMETER = 1000.0
 
-    class << self
-      # Default output options
-      @@options = DEFAULT_OPTIONS.clone
-      def options
-        @@options
-      end
+    include M9t::Base
 
-      def reset_options!
-        @@options = DEFAULT_OPTIONS.clone
+    class << self
+
+      def unit_name
+        'distance'
       end
 
       # Unit convertors: convert to meters
@@ -44,24 +42,7 @@ module M9t
 
     end
 
-    attr_reader :value, :options
     alias :to_meters :value
-
-    def initialize(value, options = Distance.options.clone)
-      @value, @options = value.to_f, Distance.options.merge(options)
-      raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'") if not KNOWN_UNITS.find_index(@options[:units])
-    end
-
-    def to_s
-      value_in_units = Distance.send("to_#{ @options[:units] }", @value)
-      localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ @options[:precision] }f"})
-
-      key = 'units.distance.' + @options[:units].to_s
-      @options[:abbreviated] ? key += '.abbreviated' : key += '.full'
-      unit = I18n.t(key, {:count => value_in_units})
-
-      "#{ localized_value }%s#{ unit }" % (@options[:abbreviated] ? '' : ' ')
-    end
 
     def to_kilometers
       self.class.to_kilometers(@value)

@@ -5,19 +5,17 @@ require 'i18n'
 module M9t
 
   class Direction
-    DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => true, :decimals => 0}
-    CIRCLE = 360.0
+    DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => false, :decimals => 0}
     KNOWN_UNITS = [:degrees, :compass]
+    CIRCLE = 360.0
     SECTOR_DEGREES = CIRCLE / 16.0
 
-    class << self
-      @@options = DEFAULT_OPTIONS.clone
-      def options
-        @@options
-      end
+    include M9t::Base
 
-      def reset_options!
-        @@options = DEFAULT_OPTIONS.clone
+    class << self
+
+      def unit_name
+        'direction'
       end
 
       def to_degrees(d)
@@ -45,25 +43,14 @@ module M9t
           d
         end
       end
-    end
 
-    attr_reader :value, :options
-
-    def initialize(value, options = Direction.options.clone)
-      @value, @options = value.to_f, Direction.options.merge(options)
-      raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'") if not KNOWN_UNITS.find_index(@options[:units])
     end
 
     def to_s
-      value_in_units = Direction.send("to_#{ @options[:units] }", @value)
       if @options[:units] == :compass
         Direction.to_compass(@value)
       else
-        localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ @options[:decimals] }f"})
-        key = 'units.direction.degrees'
-        key += @options[:abbreviated] ? '.abbreviated' : '.full'
-        unit = I18n.t(key, {:count => value_in_units})
-        "#{ localized_value }%s#{ unit }" % (@options[:abbreviated] ? '' : ' ')
+        super
       end
     end
 
