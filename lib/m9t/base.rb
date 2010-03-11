@@ -15,7 +15,6 @@ module M9t
           sub.instance_eval do
             M9t::Base.add_options(sub)
           end
-          puts "New subclass: #{sub}"
         end
 
         # Returns the classes current options - see the specific class for defaults
