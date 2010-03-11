@@ -18,14 +18,14 @@ module M9t
 
     class << self
 
-      # Converts kilometers per hour to meters per second
-      def kilometers_per_hour(kmh)
-        kmh.to_f * MS_TO_KMH
+      # Accepts kilometers per hour and returns a M9t::Speed instance
+      def kilometers_per_hour(kmh, options = {})
+        new(kmh.to_f * MS_TO_KMH, options)
       end
 
-      # Converts miles per hour to meters per second
-      def miles_per_hour(mph)
-        mph.to_f * MS_TO_MPH
+      # Accepts miles per hour and returns a M9t::Speed instance
+      def miles_per_hour(mph, options = {})
+        new(mph.to_f * MS_TO_MPH, options)
       end
 
       # Identity conversion. Simply returns the supplied number

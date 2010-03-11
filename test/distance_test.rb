@@ -37,11 +37,11 @@ class TestM9tDistance < Test::Unit::TestCase
 
   # Conversion from non-SI units
   def test_kilometers
-    assert_equal(300.0, M9t::Distance.kilometers(0.3))
+    assert_equal(300.0, M9t::Distance.kilometers(0.3).value)
   end
 
   def test_miles
-    assert_equal(0.3 * 1609.344, M9t::Distance.miles(0.3))
+    assert_equal(0.3 * 1609.344, M9t::Distance.miles(0.3).value)
   end
 
   # Conversion to non-SI units
@@ -124,7 +124,7 @@ class TestM9tDistance < Test::Unit::TestCase
   end
 
   def test_miles_singular
-    distance = M9t::Distance.new(M9t::Distance.miles(1), {:units => :miles, :precision => 0})
+    distance = M9t::Distance.miles(1, {:units => :miles, :precision => 0})
     I18n.locale = :en
     assert_equal(distance.to_s, '1 mile')
     I18n.locale = :it

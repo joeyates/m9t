@@ -17,14 +17,14 @@ module M9t
 
     class << self
 
-      # Converts kilometers into meters
-      def kilometers(km)
-        km.to_f * METERS_PER_KILOMETER
+      # Accepts a value in kilometers and returns the equivalent M9t::Distance
+      def kilometers(km, options = {})
+        new(km.to_f * METERS_PER_KILOMETER, options)
       end
 
-      # Converts miles into meters
-      def miles(m)
-        m.to_f * METERS_PER_MILE
+      # Accepts a value in miles and returns the equivalent M9t::Distance
+      def miles(m, options = {})
+        new(m.to_f * METERS_PER_MILE, options)
       end
 
       # Identity conversion. Simply returns the supplied number
