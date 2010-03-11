@@ -18,6 +18,11 @@ module M9t
 
     class << self
 
+      # Alias for new
+      def meters(*args)
+        new(*args)
+      end
+
       # Accepts a value in kilometers and returns the equivalent M9t::Distance
       def kilometers(km, options = {})
         new(km.to_f * METERS_PER_KILOMETER, options)

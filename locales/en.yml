@@ -41,5 +41,18 @@ en:
           zero: knots
           one: knot
           other: knots
+    temperature:
+      degrees:
+        full:
+          zero: degrees
+          one: degree
+          other: degrees
+        abbreviated: °C
+      kelvin:
+        full:
+          zero: kelvin
+          one: kelvin
+          other: kelvin
+        abbreviated: K
   direction:
     sectors: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', 'N']

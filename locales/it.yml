@@ -41,5 +41,18 @@ it:
           zero: nodi
           one: nodo
           other: nodi
+    temperature:
+      degrees:
+        full:
+          zero: gradi
+          one: grado
+          other: gradi
+        abbreviated: °C
+      kelvin:
+        full:
+          zero: kelvin
+          one: kelvin
+          other: kelvin
+        abbreviated: K
   direction:
     sectors: ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSO', 'SO', 'OSO', 'O', 'ONO', 'NO', 'NNO', 'N']
