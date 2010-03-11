@@ -36,6 +36,11 @@ module M9t
         new(knots.to_f / MS_TO_KNOTS, options)
       end
 
+      # Alias for new
+      def meters_per_second(*args)
+        new(*args)
+      end
+
       # Identity conversion. Simply returns the supplied number
       def to_meters_per_second(mps)
         mps.to_f
