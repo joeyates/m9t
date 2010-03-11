@@ -5,6 +5,7 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'distance')
 
 module M9t
 
+  # Represents a speed
   class Speed
     DEFAULT_OPTIONS = {:units => :meters_per_second, :abbreviated => false, :precision => 5}
     KNOWN_UNITS     = [:meters_per_second, :kilometers_per_hour, :miles_per_hour, :knots]

@@ -36,8 +36,7 @@ module M9t
     # * +options+ - See individual classes for options
     def initialize(value, options = self.class.options.clone)
       @value, @options = value.to_f, self.class.options.merge(options)
-      raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'. Known: #{ self.class::KNOWN_UNITS.collect{|unit| unit.to_s}.join(', ') }") \
-        if not self.class::KNOWN_UNITS.find_index(@options[:units])
+      units_error(@options[:units]) if not self.class::KNOWN_UNITS.find_index(@options[:units])
     end
 
     # Returns the string representation of the measurement,
@@ -53,6 +52,11 @@ module M9t
       "#{ localized_value }%s#{ unit }" % (@options[:abbreviated] ? '' : ' ')
     end
 
+    private
+
+    def units_error(units)
+      raise M9t::UnitError.new("Unknown units '#{ units }'. Known: #{ self.class::KNOWN_UNITS.collect{|unit| unit.to_s}.join(', ') }")
+    end
   end
 
 end

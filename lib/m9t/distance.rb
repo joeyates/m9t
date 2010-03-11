@@ -5,6 +5,7 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'base')
 
 module M9t
 
+  # Represents a distance
   class Distance
     DEFAULT_OPTIONS      = {:units => :meters, :abbreviated => false, :precision => 5}
     KNOWN_UNITS          = [:meters, :miles, :kilometers]
@@ -23,23 +24,23 @@ module M9t
       end
 
       # Accepts a value in miles and returns the equivalent M9t::Distance
-      def miles(m, options = {})
-        new(m.to_f * METERS_PER_MILE, options)
+      def miles(miles, options = {})
+        new(miles.to_f * METERS_PER_MILE, options)
       end
 
       # Identity conversion. Simply returns the supplied number
-      def to_meters(m)
-        m.to_f
+      def to_meters(meters)
+        meters.to_f
       end
 
       # Converts meters into kilometers
-      def to_kilometers(m)
-        m.to_f / METERS_PER_KILOMETER
+      def to_kilometers(meters)
+        meters.to_f / METERS_PER_KILOMETER
       end
 
       # Converts meters into miles
-      def to_miles(m)
-        m.to_f / METERS_PER_MILE
+      def to_miles(meters)
+        meters.to_f / METERS_PER_MILE
       end
 
     end
