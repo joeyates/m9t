@@ -13,8 +13,10 @@ The emphasis is on:
 == Other Software
 
 * ruby-units
-  * doesn't handle i18n - very difficult to integrate
-  * monkey patches a lot of core classes
+  * Doesn't handle i18n:
+    * The library depends heavily on English string representations of units.
+  * Monkey patches a lot of core classes:
+    * Adds methods to e.g. Object.
 
 == License
 

@@ -22,7 +22,7 @@ spec = Gem::Specification.new do |s|
   s.author      = 'Joe Yates'
   s.email       = 'joe.g.yates@gmail.com'
 
-  s.files         = ['README.rdoc', 'COPYING', 'Rakefile'] + FileList['{lib,test}/**/*.rb']
+  s.files         = ['README.rdoc', 'COPYING', 'Rakefile'] + FileList['{lib,test}/**/*.rb'] + FileList['locales/**/*.{rb,yml}']
   s.require_paths = ['lib']
   s.add_dependency('i18n', '>= 0.3.5')
 
