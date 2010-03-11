@@ -21,8 +21,8 @@ class TestM9tDirection < Test::Unit::TestCase
 
   # Base class
 
-  def test_unit_name
-    assert(M9t::Direction.unit_name)
+  def test_measurement_name
+    assert_equal('direction', M9t::Direction.measurement_name)
   end
 
   def test_normalize

@@ -5,32 +5,30 @@ require 'i18n'
 module M9t
 
   class Direction
-    DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => false, :decimals => 0}
-    KNOWN_UNITS = [:degrees, :compass]
-    CIRCLE = 360.0
-    SECTOR_DEGREES = CIRCLE / 16.0
+    DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => false, :decimals => 5}
+    KNOWN_UNITS     = [:degrees, :compass]
+
+    # Conversions
+    CIRCLE                 = 360.0
+    COMPASS_SECTOR_DEGREES = CIRCLE / 16.0
 
     include M9t::Base
 
     class << self
-
-      def unit_name
-        'direction'
-      end
 
       def to_degrees(d)
         d
       end
 
       def to_compass(d)
-        sector = (normalize(d) / SECTOR_DEGREES).round
-        I18n.t('direction.sectors')[sector]
+        sector = (normalize(d) / COMPASS_SECTOR_DEGREES).round
+        I18n.t(self.measurement_name + '.sectors')[sector]
       end
 
       def compass(s)
-        sector = I18n.t('direction.sectors').find_index(s)
+        sector = I18n.t(self.measurement_name + '.sectors').find_index(s)
         raise "Compass direction '#{ s }' not recognised" if sector.nil?
-        new(sector.to_f * SECTOR_DEGREES)
+        new(sector.to_f * COMPASS_SECTOR_DEGREES)
       end
 
       def normalize(d)

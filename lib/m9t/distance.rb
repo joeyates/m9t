@@ -6,18 +6,16 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'base')
 module M9t
 
   class Distance
-    DEFAULT_OPTIONS = {:units => :meters, :abbreviated => false, :precision => 5}
-    KNOWN_UNITS = [:meters, :miles, :kilometers]
+    DEFAULT_OPTIONS      = {:units => :meters, :abbreviated => false, :precision => 5}
+    KNOWN_UNITS          = [:meters, :miles, :kilometers]
+
+    # Conversions
     METERS_PER_MILE      = 1609.344
     METERS_PER_KILOMETER = 1000.0
 
     include M9t::Base
 
     class << self
-
-      def unit_name
-        'distance'
-      end
 
       # Unit convertors: convert to meters
       def miles(m)

@@ -32,7 +32,7 @@ class TestM9tDistance < Test::Unit::TestCase
   # Base class
 
   def test_unit_name
-    assert(M9t::Distance.unit_name)
+    assert_equal('distance', M9t::Distance.measurement_name)
   end
 
   # Conversion from non-SI units
