@@ -18,23 +18,27 @@ module M9t
 
     class << self
 
-      # Unit convertors: convert to meters per second
+      # Converts kilometers per hour to meters per second
       def kilometers_per_hour(kmh)
         kmh.to_f * MS_TO_KMH
       end
 
+      # Converts miles per hour to meters per second
       def miles_per_hour(mph)
         mph.to_f * MS_TO_MPH
       end
 
+      # Identity conversion. Simply returns the supplied number
       def to_meters_per_second(mps)
         mps.to_f
       end
 
+      # Converts meters per second to kilometers per hour
       def to_kilometers_per_hour(mps)
         mps.to_f / MS_TO_KMH
       end
 
+      # Converts meters per second to miles per hour
       def to_miles_per_hour(mps)
         mps.to_f / MS_TO_MPH
       end
@@ -43,10 +47,12 @@ module M9t
 
     alias :to_meters_per_second :value
 
+    # Returns the value converted to kilometers per hour
     def to_kilometers_per_hour
       self.class.to_kilometers_per_hour(@value)
     end
 
+    # Returns the value converted to miles per hour
     def to_miles_per_hour
       self.class.to_miles_per_hour(@value)
     end

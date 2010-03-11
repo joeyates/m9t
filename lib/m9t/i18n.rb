@@ -2,10 +2,12 @@
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
 
-# Monkey patch I18n, adding:
-# - handling for non-English numerical separators
+# Monkey patch I18n
 module I18n
 
+  # Handle non-English numerical separators
+  # with I18n.locale = :it,
+  #   I18n.localize_float(5.23) => '5,23000'
   def I18n.localize_float(f, options = {})
     format = options[:format] || '%f'
     s = format % f

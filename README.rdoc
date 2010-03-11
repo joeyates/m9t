@@ -1,14 +1,15 @@
 == m9t - Various units of measurement
 
-This package aims to handle the basic units of measure:
-* Distance
-* Temperature
-* Direction
-* Speed
+This package handles the basic units of measure:
+* distance,
+* direction,
+* speed,
+* temperature,
+* weight.
 
 The emphasis is on:
-* coherent interface
-* ease of translation
+* coherent interface,
+* ease of translation (using i18n).
 
 == Other Software
 

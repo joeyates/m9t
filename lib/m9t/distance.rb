@@ -17,23 +17,27 @@ module M9t
 
     class << self
 
-      # Unit convertors: convert to meters
-      def miles(m)
-        m.to_f * METERS_PER_MILE
-      end
-
+      # Converts kilometers into meters
       def kilometers(km)
         km.to_f * METERS_PER_KILOMETER
       end
 
+      # Converts miles into meters
+      def miles(m)
+        m.to_f * METERS_PER_MILE
+      end
+
+      # Identity conversion. Simply returns the supplied number
       def to_meters(m)
         m.to_f
       end
 
+      # Converts meters into kilometers
       def to_kilometers(m)
         m.to_f / METERS_PER_KILOMETER
       end
 
+      # Converts meters into miles
       def to_miles(m)
         m.to_f / METERS_PER_MILE
       end
@@ -42,10 +46,12 @@ module M9t
 
     alias :to_meters :value
 
+    # Returns the value converted to kilometers
     def to_kilometers
       self.class.to_kilometers(@value)
     end
 
+    # Returns the value converted to miles
     def to_miles
       self.class.to_miles(@value)
     end

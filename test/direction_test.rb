@@ -48,8 +48,8 @@ class TestM9tDirection < Test::Unit::TestCase
 
   def test_to_compass
     assert_equal('N', M9t::Direction.to_compass(0))
-    assert_equal('N', M9t::Direction.to_compass(7)) # Quantizing
-    assert_equal('E', M9t::Direction.to_compass(93)) # Quantizing
+    assert_equal('NE', M9t::Direction.to_compass(42)) # Quantizing up
+    assert_equal('E', M9t::Direction.to_compass(93)) # Quantizing down
     assert_equal('ESE', M9t::Direction.to_compass(113)) # 16ths
     I18n.locale = :it
     assert_equal('O', M9t::Direction.to_compass(270))

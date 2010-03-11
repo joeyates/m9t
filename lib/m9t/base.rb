@@ -6,7 +6,7 @@ module M9t
 
   module Base
 
-    def self.included(base)
+    def self.included(base) #:nodoc:
 
       base.instance_eval do
         # Returns the classes current options - see the specific class for defaults
@@ -32,12 +32,16 @@ module M9t
 
     attr_reader :value, :options
 
+    # ==== Parameters
+    # * +options+ - See individual classes for options
     def initialize(value, options = self.class.options.clone)
       @value, @options = value.to_f, self.class.options.merge(options)
       raise M9t::UnitError.new("Unknown units '#{ @options[:units] }'. Known: #{ self.class::KNOWN_UNITS.collect{|unit| unit.to_s}.join(', ') }") \
         if not self.class::KNOWN_UNITS.find_index(@options[:units])
     end
 
+    # Returns the string representation of the measurement,
+    # taking into account locale, desired units and abbreviation.
     def to_s
       value_in_units = self.class.send("to_#{ @options[:units] }", @value)
       localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ @options[:precision] }f"})
