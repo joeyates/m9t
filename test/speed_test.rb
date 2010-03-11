@@ -25,16 +25,30 @@ class TestM9tSpeed < Test::Unit::TestCase
     assert_equal('speed', M9t::Speed.measurement_name)
   end
 
+  # conversion constants
+
+  def test_knot_conversion
+    assert_in_delta(1.9438, M9t::Speed::MS_TO_KNOTS, 0.0001)
+  end
+
   # input conversions
 
+  def test_class_kilometers_per_hour
+    assert_in_delta(0.2778, M9t::Speed.kilometers_per_hour(1).value, 0.0001)
+  end
+
   def test_class_miles_per_hour
-    assert_equal(45, M9t::Speed.miles_per_hour(20.1168).value)
+    assert_in_delta(0.447, M9t::Speed.miles_per_hour(1).value, 0.0001)
+  end
+
+  def test_class_knots
+    assert_in_delta 0.5144, M9t::Speed.knots(1).value, 0.0001
   end
 
   # output conversions
 
   def test_class_to_miles_per_hour
-    assert_equal(20.1168, M9t::Speed.to_miles_per_hour(45))
+    assert_in_delta(100.6621, M9t::Speed.to_miles_per_hour(45), 0.0001)
   end
 
   # Instance methods
@@ -48,17 +62,19 @@ class TestM9tSpeed < Test::Unit::TestCase
   # output conversions
 
   def test_kmh
-    assert_equal(12.5, M9t::Speed.new(45).to_kilometers_per_hour)
+    assert_equal(162, M9t::Speed.new(45).to_kilometers_per_hour)
   end
 
   def test_mph
-    assert_equal(20.1168, M9t::Speed.new(45).to_miles_per_hour)
+    assert_in_delta(100.6621, M9t::Speed.new(45).to_miles_per_hour, 0.0001)
   end
 
   # to_s
 
   def test_to_s
     assert_equal '135.00000 meters per second', M9t::Speed.new(135).to_s
+    I18n.locale = :it
+    assert_equal '135,00000 metri al second', M9t::Speed.new(135).to_s
   end
 
   def test_to_s_precision
@@ -67,6 +83,12 @@ class TestM9tSpeed < Test::Unit::TestCase
 
   def test_to_s_abbreviated
     assert_equal '135m/s', M9t::Speed.new(135, :abbreviated => true, :precision => 0).to_s
+  end
+
+  def test_to_s_knots
+    assert_equal '262 knots', M9t::Speed.new(135, {:units => :knots, :precision => 0}).to_s
+    I18n.locale = :it
+    assert_equal '262 nodi', M9t::Speed.new(135, {:units => :knots, :precision => 0}).to_s
   end
 
 end
