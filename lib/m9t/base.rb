@@ -6,9 +6,18 @@ module M9t
 
   module Base
 
-    def self.included(base) #:nodoc:
+    def self.add_options(klass)
 
-      base.instance_eval do
+      klass.instance_eval do
+
+        # Make sure derived classes get the extra methods
+        def inherited(sub) #:nodoc:
+          sub.instance_eval do
+            M9t::Base.add_options(sub)
+          end
+          puts "New subclass: #{sub}"
+        end
+
         # Returns the classes current options - see the specific class for defaults
         def options
           @options
@@ -20,7 +29,7 @@ module M9t
         end
 
         # The name used for i18n translations
-        # E.g. M9t::Distance => 'distance'
+        #  M9t::Distance => 'distance'
         def measurement_name
           name.downcase.split('::')[1]
         end
@@ -28,6 +37,11 @@ module M9t
         reset_options!
       end
 
+    end
+
+    # Adds methods for handling options
+    def self.included(base) #:nodoc:
+      M9t::Base.add_options(base)
     end
 
     attr_reader :value, :options
