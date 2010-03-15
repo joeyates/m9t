@@ -12,10 +12,10 @@ module M9t
 
     # Conversions
     SECONDS_PER_HOUR  = 60.0 * 60
-    MS_TO_KMH         = SECONDS_PER_HOUR / M9t::Distance::METERS_PER_KILOMETER
-    MS_TO_MPH         = SECONDS_PER_HOUR / M9t::Distance::METERS_PER_MILE
+    MS_TO_KMH         = SECONDS_PER_HOUR / M9t::Distance::KILOMETER
+    MS_TO_MPH         = SECONDS_PER_HOUR / M9t::Distance::MILE
     KNOTS_TO_KMH      = 1.852
-    MS_TO_KNOTS       = 1.0 / (KNOTS_TO_KMH / SECONDS_PER_HOUR * M9t::Distance::METERS_PER_KILOMETER)
+    MS_TO_KNOTS       = 1.0 / (KNOTS_TO_KMH / SECONDS_PER_HOUR * M9t::Distance::KILOMETER)
 
     include M9t::Base
 

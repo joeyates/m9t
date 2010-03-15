@@ -22,6 +22,11 @@ en:
           zero: miles
           one: mile
           other: miles
+      feet:
+        full:
+          one: foot
+          other: feet
+        abbreviated: ft
     direction:
       degrees:
         full:

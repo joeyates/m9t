@@ -22,6 +22,10 @@ it:
           zero: miglia
           one: miglio
           other: miglia
+      feet:
+        full:
+          one: foot
+          other: feet
     direction:
       degrees:
         full:
