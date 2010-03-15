@@ -85,6 +85,11 @@ module M9t
       self.class.to_miles_per_hour(@value)
     end
 
+    # Returns the value converted to miles per hour
+    def to_knots
+      self.class.to_knots(@value)
+    end
+
   end
 
 end
