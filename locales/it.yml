@@ -40,6 +40,11 @@ it:
           one: metro al second
           other: metri al second
         abbreviated: m/s
+      kilometers_per_hour:
+        full:
+          one: "chilometro l'ora"
+          other: "chilometro l'ora"
+        abbreviated: km/h
       knots:
         full:
           zero: nodi

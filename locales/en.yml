@@ -41,6 +41,11 @@ en:
           one: meter per second
           other: meters per second
         abbreviated: m/s
+      kilometers_per_hour:
+        full:
+          one: kilometer per hour
+          other: kilometers per hour
+        abbreviated: km/h
       knots:
         full:
           zero: knots
