@@ -34,15 +34,6 @@ module M9t
       bar.to_f
     end
 
-    def Pressure.parse(pressure)
-      case
-      when pressure =~ /^Q(\d{4})$/
-        hectopascals($1.to_f)
-      when pressure =~ /^A(\d{4})$/
-        inches_of_mercury($1.to_f / 100.0)
-      end
-    end
-
     def to_inches_of_mercury
       Pressure.to_inches_of_mercury(@value)
     end
