@@ -27,6 +27,7 @@ require 'i18n'
 
 locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
 I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
+I18n.reload!
 
 Dir[File.dirname(__FILE__) + '/m9t/*.rb'].each do |file|
   require file
