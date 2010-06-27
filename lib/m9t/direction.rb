@@ -7,7 +7,10 @@ module M9t
   # Represents a geographical direction
   class Direction
     DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => false, :decimals => 5}
-    KNOWN_UNITS     = [:degrees, :compass]
+    CONVERSIONS          = {
+      :degrees  => 1.0,
+      :compass  => nil,
+    }
 
     # Conversions
     CIRCLE                 = 360.0
@@ -17,16 +20,15 @@ module M9t
 
     class << self
 
-      # Identity conversion. Simply returns the supplied number
-      def to_degrees(degrees)
-        degrees.to_f
-      end
-
       # Given a value in degrees, returns the nearest (localized) compass direction
       #  M9t::Directions.to_compass(42) => 'NE'
-      def to_compass(degrees)
+      def degrees_to_compass(degrees)
         sector = (normalize(degrees) / COMPASS_SECTOR_DEGREES).round
         I18n.t(self.measurement_name + '.sectors')[sector]
+      end
+
+      def compass_to_degrees(compass_direction)
+        compass(compass_direction).to_f
       end
 
       # Accepts a localized compass direction (e.g. 'N') and returns the equivalent M9t::Direction
@@ -55,10 +57,14 @@ module M9t
     # Handles the special case where compass directions are the desired output.
     def to_s
       if @options[:units] == :compass
-        Direction.to_compass(@value)
+        Direction.degrees_to_compass(@value)
       else
         super
       end
+    end
+
+    def to_compass
+      self.class.degrees_to_compass(@value)
     end
 
   end

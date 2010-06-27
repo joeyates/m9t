@@ -9,7 +9,11 @@ module M9t
   # Using degrees (celcius), not kelvin, as default unit
   class Temperature
     DEFAULT_OPTIONS      = {:units => :degrees, :abbreviated => false, :precision => 5}
-    KNOWN_UNITS          = [:degrees, :kelvin, :fahrenheit]
+    CONVERSIONS          = {
+      :degrees   => 1.0,
+      :kelvin    => nil,
+      :fahrenheit => nil
+    }
 
     # Conversions
     ABSOLUTE_ZERO = -273.15
@@ -18,11 +22,6 @@ module M9t
 
     class << self
 
-      # Alias for new
-      def degrees(*args)
-        new(*args)
-      end
-
       # Accepts a value in kelvin and returns the equivalent M9t::Temperature
       def kelvin(kelvin, options = {})
         new(kelvin.to_f + ABSOLUTE_ZERO, options)
@@ -30,11 +29,6 @@ module M9t
 
       def fahrenheit(fahrenheit, options = {})
         new(fahrenheit_to_degrees(fahrenheit), options)
-      end
-
-      # Identity conversion. Simply returns the supplied number
-      def to_degrees(degrees)
-        degrees.to_f
       end
 
       # Converts degrees to kelvin

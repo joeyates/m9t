@@ -35,23 +35,37 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal('distance', M9t::Distance.measurement_name)
   end
 
-  # Conversion from non-SI units
-  def test_kilometers
-    assert_equal(300.0, M9t::Distance.kilometers(0.3).value)
+  # Construction
+  # ...from meters
+  def test_new
+    assert_equal(0.3, M9t::Distance.new(0.3).to_f)
   end
 
-  def test_miles
-    assert_equal(0.3 * 1609.344, M9t::Distance.miles(0.3).value)
+  def test_class_meters
+    assert_equal(0.3, M9t::Distance.meters(0.3).to_f)
   end
 
-  # Conversion to non-SI units
-  def test_class_to_meters
-    assert_equal(0.3, M9t::Distance.to_meters(0.3))
+  # ...from other units
+  def test_class_kilometers
+    assert_in_delta(300.0, M9t::Distance.kilometers(0.3).to_f, 0.00001)
   end
 
-  def test_class_to_kilometers
-    assert_equal(0.0003, M9t::Distance.to_kilometers(0.3))
+  def test_class_miles
+    assert_in_delta(1609.344, M9t::Distance.miles(1).to_f, 0.00001)
+    assert_in_delta(42194.988, M9t::Distance.miles(26.21875).to_f, 0.00001)
   end
+
+  # Conversion class methods
+  # ...to other units
+  def test_class_meters_to_kilometers
+    assert_equal(0.0003, M9t::Distance.meters_to_kilometers(0.3))
+  end
+
+  def test_class_miles_to_kilometers
+    assert_in_delta(42.194988, M9t::Distance.miles_to_kilometers(26.21875), 0.00001)
+  end
+
+  # Default options
 
   def test_default_options_set
     assert_not_nil(M9t::Distance.options)
@@ -71,10 +85,20 @@ class TestM9tDistance < Test::Unit::TestCase
 
   # Instance methods
 
-  def test_new
-    assert_equal(0.3, M9t::Distance.new(0.3).value)
+  # Conversion
+  def test_instance_to_meters
+    assert_equal(0.3, M9t::Distance.new(0.3).to_meters)
   end
 
+  def test_instance_to_kilometers
+    assert_equal(0.0003, M9t::Distance.new(0.3).to_kilometers)
+  end
+
+  def test_instance_to_kilometers
+    assert_in_delta(0.98425, M9t::Distance.new(0.3).to_feet, 0.00001)
+  end
+
+  # Options
   def test_default_options_merged
     distance = M9t::Distance.new(10, {:abbreviated => true})
     assert_equal(:meters, distance.options[:units])
@@ -87,14 +111,7 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal(0, distance.options[:precision])
   end
 
-  def test_to_meters
-    assert_equal(0.3, M9t::Distance.new(0.3).to_meters)
-  end
-
-  def test_to_kilometers
-    assert_equal(0.0003, M9t::Distance.new(0.3).to_kilometers)
-  end
-
+  # to_s
   def test_to_s_singular
     assert_equal('1.00000 meter', M9t::Distance.new(1).to_s)
   end
@@ -103,6 +120,7 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal('0.30000 meters', M9t::Distance.new(0.3).to_s)
   end
 
+  # i18n
   def test_to_s_plural_abbreviated
     distance = M9t::Distance.new(10, {:abbreviated => true, :precision => 0})
     I18n.locale = :en
@@ -124,19 +142,19 @@ class TestM9tDistance < Test::Unit::TestCase
   end
 
   def test_miles_singular
-    distance = M9t::Distance.miles(1, {:units => :miles, :precision => 0})
+    marathon = M9t::Distance.miles(26.21875, {:units => :miles, :precision => 0})
     I18n.locale = :en
-    assert_equal(distance.to_s, '1 mile')
+    assert_equal('26 miles', marathon.to_s)
     I18n.locale = :it
-    assert_equal(distance.to_s, '1 miglio')
+    assert_equal('26 miglia', marathon.to_s)
   end
 
   def test_to_s_miles_plural
-    distance = M9t::Distance.new(10000, {:units => :miles, :precision => 1})
+    ten_km = M9t::Distance.new(10000, {:units => :miles, :precision => 1})
     I18n.locale = :en
-    assert_equal('6.2 miles', distance.to_s)
+    assert_equal('6.2 miles', ten_km.to_s)
     I18n.locale = :it
-    assert_equal('6,2 miglia', distance.to_s)
+    assert_equal('6,2 miglia', ten_km.to_s)
   end
 
 end

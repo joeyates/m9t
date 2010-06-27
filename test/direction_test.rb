@@ -43,21 +43,25 @@ class TestM9tDirection < Test::Unit::TestCase
   end
 
   def test_to_degrees_identity
-    assert_equal(45, M9t::Direction.to_degrees(45))
+    assert_equal(45, M9t::Direction.degrees_to_degrees(45))
   end
 
-  def test_to_compass
-    assert_equal('N', M9t::Direction.to_compass(0))
-    assert_equal('NE', M9t::Direction.to_compass(42)) # Quantizing up
-    assert_equal('E', M9t::Direction.to_compass(93)) # Quantizing down
-    assert_equal('ESE', M9t::Direction.to_compass(113)) # 16ths
+  def test_degrees_to_compass
+    assert_equal('N', M9t::Direction.degrees_to_compass(0))
+    assert_equal('NE', M9t::Direction.degrees_to_compass(42)) # Quantizing up
+    assert_equal('E', M9t::Direction.degrees_to_compass(93)) # Quantizing down
+    assert_equal('ESE', M9t::Direction.degrees_to_compass(113)) # 16ths
     I18n.locale = :it
-    assert_equal('O', M9t::Direction.to_compass(270))
+    assert_equal('O', M9t::Direction.degrees_to_compass(270))
   end
 
   def test_compass
     assert_equal(0, M9t::Direction.compass('N').value)
     assert_equal(247.5, M9t::Direction.compass('WSW').value)
+  end
+
+  def test_compass_to_degrees
+    assert_equal(247.5, M9t::Direction.compass_to_degrees('WSW'))
   end
 
   # Instance methods

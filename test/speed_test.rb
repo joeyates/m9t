@@ -28,7 +28,7 @@ class TestM9tSpeed < Test::Unit::TestCase
   # conversion constants
 
   def test_knot_conversion
-    assert_in_delta(1.9438, M9t::Speed::MS_TO_KNOTS, 0.0001)
+    assert_in_delta(0.51444, M9t::Speed::KNOTS, 0.0001)
   end
 
   # input conversions
@@ -48,7 +48,7 @@ class TestM9tSpeed < Test::Unit::TestCase
   # output conversions
 
   def test_class_to_miles_per_hour
-    assert_in_delta(100.6621, M9t::Speed.to_miles_per_hour(45), 0.0001)
+    assert_in_delta(100.6621, M9t::Speed.meters_per_second_to_miles_per_hour(45), 0.0001)
   end
 
   # Instance methods
