@@ -24,7 +24,6 @@
 # encoding: utf-8
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
-require 'bundler/version'
 
 locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
 I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
@@ -35,14 +34,6 @@ Dir[File.dirname(__FILE__) + '/m9t/*.rb'].each do |file|
 end
 
 module M9t
-
-  module VERSION #:nodoc:
-    MAJOR = 0
-    MINOR = 1
-    TINY = 12
- 
-    STRING = [MAJOR, MINOR, TINY].join('.')
-  end
 
   # Base class for all M9t exceptions
   class M9tError < StandardError
