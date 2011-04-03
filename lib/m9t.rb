@@ -24,6 +24,7 @@
 # encoding: utf-8
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
+require 'bundler/version'
 
 locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
 I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
