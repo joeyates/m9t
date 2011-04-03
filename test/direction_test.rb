@@ -66,30 +66,34 @@ class TestM9tDirection < Test::Unit::TestCase
 
   # Instance methods
 
-  def test_unknown_units
-    assert_raises(M9t::UnitError) { M9t::Direction.new(10, {:units => :foos}) }
-  end
-
   def test_to_s_not_abbreviated_singular
-    assert_equal '1 degree', M9t::Direction.new(1).to_s
+    direction = M9t::Direction.new( 1 )
+
+    assert_equal '1 degree', direction.to_s
     I18n.locale = :it
-    assert_equal '1 grado', M9t::Direction.new(1).to_s
+    assert_equal '1 grado', direction.to_s
   end
 
   def test_to_s_not_abbreviated_plural
-    assert_equal '135 degrees', M9t::Direction.new(135).to_s
+    direction = M9t::Direction.new( 135 )
+
+    assert_equal '135 degrees', direction.to_s
     I18n.locale = :it
-    assert_equal '135 gradi', M9t::Direction.new(135).to_s
+    assert_equal '135 gradi', direction.to_s
   end
 
   def test_to_s_abbreviated
-    assert_equal '135°', M9t::Direction.new(135, {:abbreviated => true}).to_s
+    direction = M9t::Direction.new( 135 )
+
+    assert_equal '135°', direction.to_s( :abbreviated => true )
   end
 
   def test_compass_units
-    assert_equal 'SW', M9t::Direction.new(225, {:units => :compass}).to_s
+    direction = M9t::Direction.new( 225 )
+
+    assert_equal 'SW', direction.to_s( :units => :compass )
     I18n.locale = :it
-    assert_equal 'SO', M9t::Direction.new(225, {:units => :compass}).to_s
+    assert_equal 'SO', direction.to_s( :units => :compass )
   end
 
   def test_handles_string_leading_zero

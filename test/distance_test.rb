@@ -14,17 +14,19 @@ class TestM9tDistance < Test::Unit::TestCase
 
   # Basic use
   def test_singular
-    distance = M9t::Distance.new(1, :precision => 0)
+    distance = M9t::Distance.new( 1 )
     I18n.locale = :en
-    assert_equal('1 meter', distance.to_s)
+
+    assert_equal('1 meter', distance.to_s( :precision => 0 ) )
   end
 
   def test_plural
-    distance = M9t::Distance.new(10, :precision => 0)
+    distance = M9t::Distance.new( 10 )
+
     I18n.locale = :en
-    assert_equal('10 meters', distance.to_s)
+    assert_equal( '10 meters', distance.to_s( :precision => 0 ) )
     I18n.locale = :it
-    assert_equal('10 metri', distance.to_s)
+    assert_equal( '10 metri', distance.to_s( :precision => 0 ) )
   end
 
   # Class methods
@@ -98,19 +100,6 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_in_delta(0.98425, M9t::Distance.new(0.3).to_feet, 0.00001)
   end
 
-  # Options
-  def test_default_options_merged
-    distance = M9t::Distance.new(10, {:abbreviated => true})
-    assert_equal(:meters, distance.options[:units])
-    assert_equal(5, distance.options[:precision])
-  end
-
-  def test_set_default_options_get_inherited
-    M9t::Distance.options[:precision] = 0
-    distance = M9t::Distance.new(10)
-    assert_equal(0, distance.options[:precision])
-  end
-
   # to_s
   def test_to_s_singular
     assert_equal('1.00000 meter', M9t::Distance.new(1).to_s)
@@ -122,39 +111,54 @@ class TestM9tDistance < Test::Unit::TestCase
 
   # i18n
   def test_to_s_plural_abbreviated
-    distance = M9t::Distance.new(10, {:abbreviated => true, :precision => 0})
+    distance = M9t::Distance.new( 10 )
     I18n.locale = :en
-    assert_equal('10m', distance.to_s)
+    assert_equal( '10m', distance.to_s( :abbreviated => true,
+                                        :precision   => 0 ) )
     I18n.locale = :it
-    assert_equal('10m', distance.to_s)
+    assert_equal( '10m', distance.to_s( :abbreviated => true,
+                                        :precision   => 0 ) )
   end
 
   def test_to_s_abbreviated
-    assert_equal('0.30000m', M9t::Distance.new(0.3, {:abbreviated => true}).to_s)
+    distance = M9t::Distance.new( 0.3 )
+
+    assert_equal( '0.30000m', distance.to_s( :abbreviated => true ) )
   end
 
   def test_to_s_precision
-    assert_equal('0.3m', M9t::Distance.new(0.3, {:precision => 1, :abbreviated => true}).to_s)
+    distance = M9t::Distance.new( 0.3 )
+
+    assert_equal( '0.3m', distance.to_s( :precision   => 1,
+                                         :abbreviated => true ) )
   end
 
   def test_to_s_kilometers
-    assert_equal('156.0 kilometers', M9t::Distance.new(156003, {:precision => 1, :units => :kilometers}).to_s)
+    distance = M9t::Distance.new( 156003 )
+
+    assert_equal( '156.0 kilometers', distance.to_s( :precision => 1,
+                                                     :units     => :kilometers ) )
   end
 
   def test_miles_singular
-    marathon = M9t::Distance.miles(26.21875, {:units => :miles, :precision => 0})
+    marathon = M9t::Distance.miles( 26.21875 )
     I18n.locale = :en
-    assert_equal('26 miles', marathon.to_s)
+    assert_equal( '26 miles', marathon.to_s( :units     => :miles,
+                                             :precision => 0 ) )
     I18n.locale = :it
-    assert_equal('26 miglia', marathon.to_s)
+    assert_equal( '26 miglia', marathon.to_s( :units     => :miles,
+                                              :precision => 0 ) )
   end
 
   def test_to_s_miles_plural
-    ten_km = M9t::Distance.new(10000, {:units => :miles, :precision => 1})
+    ten_km = M9t::Distance.new( 10000 )
+
     I18n.locale = :en
-    assert_equal('6.2 miles', ten_km.to_s)
+    assert_equal( '6.2 miles', ten_km.to_s( :units     => :miles,
+                                            :precision => 1 ) )
     I18n.locale = :it
-    assert_equal('6,2 miglia', ten_km.to_s)
+    assert_equal( '6,2 miglia', ten_km.to_s( :units     => :miles,
+                                             :precision => 1 ) )
   end
 
 end

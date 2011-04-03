@@ -56,7 +56,11 @@ class TestM9tSpeed < Test::Unit::TestCase
   # new
 
   def test_unknown_units
-    assert_raises(M9t::UnitError) { M9t::Speed.new('010', {:units => :foos}) }
+    speed = M9t::Speed.new( '010' )
+
+    assert_raises( M9t::UnitError ) do
+      speed.to_s( :units => :foos )
+    end
   end
 
   # output conversions
@@ -78,17 +82,26 @@ class TestM9tSpeed < Test::Unit::TestCase
   end
 
   def test_to_s_precision
-    assert_equal '135 meters per second', M9t::Speed.new(135, :precision => 0).to_s
+    speed = M9t::Speed.new( 135 )
+
+    assert_equal '135 meters per second', speed.to_s( :precision => 0 )
   end
 
   def test_to_s_abbreviated
-    assert_equal '135m/s', M9t::Speed.new(135, :abbreviated => true, :precision => 0).to_s
+    speed = M9t::Speed.new( 135 )
+
+    assert_equal '135m/s', speed.to_s( :abbreviated => true,
+                                       :precision   => 0 )
   end
 
   def test_to_s_knots
-    assert_equal '262 knots', M9t::Speed.new(135, {:units => :knots, :precision => 0}).to_s
+    speed = M9t::Speed.new( 135 )
+
+    assert_equal '262 knots', speed.to_s( :units     => :knots,
+                                          :precision => 0 )
     I18n.locale = :it
-    assert_equal '262 nodi', M9t::Speed.new(135, {:units => :knots, :precision => 0}).to_s
+    assert_equal '262 nodi',  speed.to_s( :units     => :knots,
+                                          :precision => 0 )
   end
 
 end

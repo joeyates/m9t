@@ -23,12 +23,12 @@ module M9t
     class << self
 
       # Accepts a value in kelvin and returns the equivalent M9t::Temperature
-      def kelvin(kelvin, options = {})
-        new(kelvin.to_f + ABSOLUTE_ZERO, options)
+      def kelvin( kelvin )
+        new( kelvin.to_f + ABSOLUTE_ZERO )
       end
 
-      def fahrenheit(fahrenheit, options = {})
-        new(fahrenheit_to_degrees(fahrenheit), options)
+      def fahrenheit( fahrenheit )
+        new( fahrenheit_to_degrees( fahrenheit ) )
       end
 
       # Converts degrees to kelvin

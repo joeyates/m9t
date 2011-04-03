@@ -55,8 +55,8 @@ module M9t
     end
 
     # Handles the special case where compass directions are the desired output.
-    def to_s
-      if @options[:units] == :compass
+    def to_s( options = {} )
+      if options[:units] == :compass
         Direction.degrees_to_compass(@value)
       else
         super

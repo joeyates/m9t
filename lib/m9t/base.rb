@@ -39,9 +39,8 @@ module M9t
         def define_constructor(name)
           return false if not self::CONVERSIONS[name.to_sym]
           self.class.instance_exec do
-            define_method(name.to_sym) do |*args|
-              options = args[1] || {}
-              new(args[0].to_f * self::CONVERSIONS[name], options)
+            define_method( name.to_sym ) do | *args |
+              new( args[ 0 ].to_f * self::CONVERSIONS[ name ] )
             end
           end
         end
@@ -90,11 +89,8 @@ module M9t
     attr_reader :value, :options
     alias :to_f :value
 
-    # ==== Parameters
-    # * +options+ - See individual classes for options
-    def initialize(value, options = self.class.options.clone)
-      @value, @options = value.to_f, self.class.options.merge(options)
-      units_error(@options[:units]) if not self.class::CONVERSIONS.has_key?(@options[:units])
+    def initialize( value )
+      @value = value.to_f
     end
 
     # define conversion instance methods as required
@@ -107,15 +103,17 @@ module M9t
 
     # Returns the string representation of the measurement,
     # taking into account locale, desired units and abbreviation.
-    def to_s
-      value_in_units = self.send("to_#{ @options[:units] }")
-      localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ @options[:precision] }f"})
+    def to_s( options = {} )
+      options = self.class.options.merge( options )
+      units_error( options[ :units ] ) if not self.class::CONVERSIONS.has_key?( options[ :units ] )
+      value_in_units = self.send("to_#{ options[:units] }")
+      localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ options[:precision] }f"})
 
-      key = 'units.' + self.class.measurement_name + '.' + @options[:units].to_s
-      @options[:abbreviated] ? key += '.abbreviated' : key += '.full'
+      key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
+      options[:abbreviated] ? key += '.abbreviated' : key += '.full'
       unit = I18n.t(key, {:count => value_in_units})
 
-      "#{ localized_value }%s#{ unit }" % (@options[:abbreviated] ? '' : ' ')
+      "#{ localized_value }%s#{ unit }" % (options[:abbreviated] ? '' : ' ')
     end
 
     private

@@ -56,7 +56,11 @@ class TestM9tTemperature < Test::Unit::TestCase
   # new
 
   def test_unknown_units
-    assert_raises(M9t::UnitError) { M9t::Temperature.new(1, {:units => :foos}) }
+    temperature = M9t::Temperature.new( 1 )
+
+    assert_raises( M9t::UnitError ) do 
+      temperature.to_s( :units => :foos )
+    end
   end
 
   # output conversions
@@ -78,18 +82,29 @@ class TestM9tTemperature < Test::Unit::TestCase
   end
 
   def test_to_s_precision
-    assert_equal '135 degrees', M9t::Temperature.new(135, :precision => 0).to_s
+    temperature = M9t::Temperature.new( 135 )
+
+    assert_equal '135 degrees', temperature.to_s( :precision => 0 )
   end
 
   def test_to_s_abbreviated
-    assert_equal '135°C', M9t::Temperature.new(135, :abbreviated => true, :precision => 0).to_s
-    assert_equal '408.15K', M9t::Temperature.new(135, :units => :kelvin, :abbreviated => true, :precision => 2).to_s
+    temperature = M9t::Temperature.new( 135 )
+
+    assert_equal '135°C',   temperature.to_s( :abbreviated => true,
+                                              :precision   => 0 )
+    assert_equal '408.15K', temperature.to_s( :units       => :kelvin,
+                                              :abbreviated => true,
+                                              :precision   => 2 )
   end
 
   def test_to_s_kelvin
-    assert_equal '373.15 kelvin', M9t::Temperature.new(100, :units => :kelvin, :precision => 2).to_s
+    temperature = M9t::Temperature.new( 100 )
+
+    assert_equal '373.15 kelvin', temperature.to_s( :units     => :kelvin,
+                                                    :precision => 2 )
     I18n.locale = :it
-    assert_equal '373,15 kelvin', M9t::Temperature.new(100, :units => :kelvin, :precision => 2).to_s
+    assert_equal '373,15 kelvin', temperature.to_s( :units     => :kelvin,
+                                                    :precision => 2 )
   end
 
 end
