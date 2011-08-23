@@ -29,8 +29,9 @@ locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales
 I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
 I18n.reload!
 
-Dir[File.dirname(__FILE__) + '/m9t/*.rb'].each do |file|
-  require file
+libs = %w( base direction distance i18n pressure speed temperature version )
+libs.each do | library |
+  require "m9t/#{ library }"
 end
 
 module M9t
