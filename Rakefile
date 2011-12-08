@@ -28,7 +28,7 @@ desc "Build the gem"
 task :build do
   system "gem build m9t.gemspec"
 end
- 
+
 desc "Publish a new version of the gem"
 task :release => :build do
   system "gem push m9t-#{M9t::VERSION}"
