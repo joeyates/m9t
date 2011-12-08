@@ -96,7 +96,7 @@ module M9t
     # define conversion instance methods as required
     def method_missing(name, *args, &block)
       if name.to_s =~ /^to_(\w+)$/
-        return send(name, @value) if define_conversion($1)
+        return send(name) if define_conversion($1)
       end
       raise "Method '#{ name }' unknown" # TODO use standard exception
     end
