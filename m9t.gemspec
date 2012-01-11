@@ -11,7 +11,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary     = 'Classes for handling measurement units'
   s.description = 'Classes for handling measurement units, conversions and translations'
 
-  s.homepage    = 'http://github.com/joeyates/m9t'
+  s.homepage    = 'https://github.com/joeyates/m9t'
   s.author      = 'Joe Yates'
   s.email       = 'joe.g.yates@gmail.com'
 
