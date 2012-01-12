@@ -18,7 +18,7 @@ gemspec = Gem::Specification.new do |s|
   s.files         = ['README.rdoc', 'COPYING', 'Rakefile'] + Rake::FileList['{lib,test}/**/*.rb'] + FileList['locales/**/*.{rb,yml}']
   s.require_paths = ['lib']
 
-  s.add_dependency 'rake', '>= 0.8.7'
+  s.add_dependency 'rake', '~> 0.8.7'
   s.add_dependency 'i18n', '>= 0.3.5'
 
   s.add_development_dependency 'rcov'      if RUBY_VERSION < '1.9'
