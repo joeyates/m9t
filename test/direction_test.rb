@@ -1,12 +1,9 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'rubygems' if RUBY_VERSION < '1.9'
-require 'test/unit'
-require File.join(File.expand_path(File.dirname(__FILE__) + '/../lib'), 'm9t')
+require File.expand_path( 'test_helper', File.dirname( __FILE__ ) )
 
 class TestM9tDirection < Test::Unit::TestCase
-  
+
   def setup
     I18n.locale = :en
     M9t::Direction.reset_options!
@@ -48,8 +45,8 @@ class TestM9tDirection < Test::Unit::TestCase
 
   def test_degrees_to_compass
     assert_equal('N', M9t::Direction.degrees_to_compass(0))
-    assert_equal('NE', M9t::Direction.degrees_to_compass(42)) # Quantizing up
-    assert_equal('E', M9t::Direction.degrees_to_compass(93)) # Quantizing down
+    assert_equal('NE', M9t::Direction.degrees_to_compass(42)) # Rounding up
+    assert_equal('E', M9t::Direction.degrees_to_compass(93)) # Rounding down
     assert_equal('ESE', M9t::Direction.degrees_to_compass(113)) # 16ths
     I18n.locale = :it
     assert_equal('O', M9t::Direction.degrees_to_compass(270))
@@ -98,6 +95,12 @@ class TestM9tDirection < Test::Unit::TestCase
 
   def test_handles_string_leading_zero
     assert_equal(10, M9t::Direction.new('010').value)
+  end
+
+  def test_to_compass
+    direction = M9t::Direction.new(0)
+
+    assert_equal('N', direction.to_compass)
   end
 
 end

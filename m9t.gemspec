@@ -21,7 +21,8 @@ gemspec = Gem::Specification.new do |s|
   s.add_dependency 'rake', '>= 0.8.7'
   s.add_dependency 'i18n', '>= 0.3.5'
 
-  s.add_development_dependency 'rcov'
+  s.add_development_dependency 'rcov'      if RUBY_VERSION < '1.9'
+  s.add_development_dependency 'simplecov' if RUBY_VERSION > '1.9'
 
   s.test_file = 'test/test_all.rb'
 

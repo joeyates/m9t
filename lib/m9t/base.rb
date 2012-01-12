@@ -69,7 +69,7 @@ module M9t
         # The name used for i18n translations
         #  M9t::Distance => 'distance'
         def measurement_name
-          name.downcase.split('::')[1]
+          name.split('::')[-1].downcase
         end
 
         def default_unit

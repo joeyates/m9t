@@ -1,12 +1,9 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'rubygems' if RUBY_VERSION < '1.9'
-require 'test/unit'
-require File.join(File.expand_path(File.dirname(__FILE__) + '/../lib'), 'm9t')
+require File.expand_path( 'test_helper', File.dirname( __FILE__ ) )
 
 class TestM9tTemperature < Test::Unit::TestCase
-  
+
   def setup
     I18n.locale = :en
     M9t::Temperature.reset_options!
@@ -49,6 +46,10 @@ class TestM9tTemperature < Test::Unit::TestCase
 
   def test_class_to_fahrenheit
     assert_in_delta(32, M9t::Temperature.to_fahrenheit(0), 0.0001)
+  end
+
+  def test_class_kelvin_to_degrees
+    assert_in_delta(-273.15, M9t::Temperature.kelvin_to_degrees(0), 0.0001)
   end
 
   # Instance methods

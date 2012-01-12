@@ -1,12 +1,9 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'rubygems' if RUBY_VERSION < '1.9'
-require 'test/unit'
-require File.join(File.expand_path(File.dirname(__FILE__) + '/../lib'), 'm9t')
+require File.expand_path( 'test_helper', File.dirname( __FILE__ ) )
 
 class TestM9tSpeed < Test::Unit::TestCase
-  
+
   def setup
     I18n.locale = :en
     M9t::Speed.reset_options!
