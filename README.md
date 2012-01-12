@@ -16,7 +16,8 @@ The emphasis is on:
 
 [![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)](http://travis-ci.org/joeyates/m9t)
 
-== Internals
+Internals
+=========
 
 Internally, values are stored in SI units, with the exception of temperature:
 
@@ -26,7 +27,8 @@ Internally, values are stored in SI units, with the exception of temperature:
 - temperature - degrees celcius,
 - weight - kilograms.
 
-== Interface
+Interface
+=========
 
 new: accepts the S.I. unit as a parameter:
 
@@ -49,13 +51,15 @@ to_s: returns a localized string with units:
     I18n.locale = :it
     puts M9t::Distance.new(3).to_s -> '3 metri'
 
-=== Class methods for conversion
+Class methods for conversion
+============================
 
 Methods are available for conversion between any pair of units:
 
     M9t::Distance.miles_to_meters(26.21875) -> 42194.988
 
-== Other Software
+Alternatives
+============
 
 - ruby-units
   - Doesn't handle i18n:
@@ -63,7 +67,8 @@ Methods are available for conversion between any pair of units:
   - Monkey patches a lot of core classes:
     - Adds methods to e.g. Object.
 
-== License
+License
+=======
 
 Dual license:
 
