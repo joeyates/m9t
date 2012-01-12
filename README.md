@@ -1,24 +1,30 @@
-== m9t - Various units of measurement
+m9t - A Ruby Gem for Measurements
+=================================
 
 This package handles the basic units of measure:
-* distance,
-* direction,
-* speed,
-* temperature,
-* weight.
+
+- distance,
+- direction,
+- speed,
+- temperature,
+- weight.
 
 The emphasis is on:
-* coherent interface,
-* ease of translation (using i18n).
+
+- coherent interface,
+- ease of translation (using i18n).
+
+[![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)](http://travis-ci.org/joeyates/m9t)
 
 == Internals
 
 Internally, values are stored in SI units, with the exception of temperature:
-* distance - meters,
-* direction - degrees,
-* speed - meters per second,
-* temperature - degrees celcius,
-* weight - kilograms.
+
+- distance - meters,
+- direction - degrees,
+- speed - meters per second,
+- temperature - degrees celcius,
+- weight - kilograms.
 
 == Interface
 
@@ -51,12 +57,15 @@ Methods are available for conversion between any pair of units:
 
 == Other Software
 
-* ruby-units
-  * Doesn't handle i18n:
-    * The library depends heavily on English string representations of units.
-  * Monkey patches a lot of core classes:
-    * Adds methods to e.g. Object.
+- ruby-units
+  - Doesn't handle i18n:
+    - The library depends heavily on English string representations of units.
+  - Monkey patches a lot of core classes:
+    - Adds methods to e.g. Object.
 
 == License
 
-MIT License. See the included COPYING file.
+Dual license:
+
+- MIT License: see MIT-LICENSE.txt,
+- GPL version 3: see GPL-LICENSE.txt
