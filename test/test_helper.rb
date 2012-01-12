@@ -1,12 +1,14 @@
 # encoding: utf-8
 
 require 'rubygems' if RUBY_VERSION < '1.9'
-require 'simplecov'
 require 'test/unit'
 
-if ENV[ 'COVERAGE' ]
-  SimpleCov.start do
-    add_filter "/test/"
+if RUBY_VERSION > '1.9'
+  require 'simplecov'
+  if ENV[ 'COVERAGE' ]
+    SimpleCov.start do
+      add_filter "/test/"
+    end
   end
 end
 

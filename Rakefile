@@ -12,6 +12,14 @@ Rake::TestTask.new do |t|
   t.verbose    = true
 end
 
+if RUBY_VERSION < '1.9'
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |t|
+    t.test_files = FileList['test/*_test.rb']
+    t.rcov_opts  << '--exclude /gems/'
+  end
+end
+
 desc "Build the gem"
 task :build do
   `gem build m9t.gemspec`

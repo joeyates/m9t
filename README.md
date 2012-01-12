@@ -58,6 +58,20 @@ Methods are available for conversion between any pair of units:
 
     M9t::Distance.miles_to_meters(26.21875) -> 42194.988
 
+Testing
+=======
+
+Coverage
+--------
+
+ruby 1.8.x:
+
+  $ rake rcov
+
+ruby 1.9.x:
+
+  $ COVERAGE=1 rake test
+
 Alternatives
 ============
 
