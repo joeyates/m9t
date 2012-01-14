@@ -3,16 +3,16 @@ $:.unshift( File.dirname(__FILE__) + '/lib' )
 require 'm9t/version'
 
 gemspec = Gem::Specification.new do |s|
-  s.name        = 'm9t'
-  s.platform    = Gem::Platform::RUBY
-  s.version     = M9t::VERSION::STRING
+  s.name          = 'm9t'
+  s.platform      = Gem::Platform::RUBY
+  s.version       = M9t::VERSION::STRING
 
-  s.summary     = 'Measurements and coversions library for Ruby'
-  s.description = 'Measurements and coversions library for Ruby'
+  s.summary       = 'Measurements and coversions library for Ruby'
+  s.description   = 'Measurements and coversions library for Ruby'
 
-  s.homepage    = 'https://github.com/joeyates/m9t'
-  s.author      = 'Joe Yates'
-  s.email       = 'joe.g.yates@gmail.com'
+  s.homepage      = 'https://github.com/joeyates/m9t'
+  s.author        = 'Joe Yates'
+  s.email         = 'joe.g.yates@gmail.com'
 
   s.files         = `git ls-files`.map( &:chomp! ).reject{ | f | f[ 0 .. 0 ] == '.' }
   s.require_paths = ['lib']
