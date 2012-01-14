@@ -25,7 +25,7 @@ class TestM9tSpeed < Test::Unit::TestCase
   # conversion constants
 
   def test_knot_conversion
-    assert_in_delta(0.51444, M9t::Speed::KNOTS, 0.0001)
+    assert_in_delta(1.9438, M9t::Speed::KNOTS, 0.0001)
   end
 
   # input conversions

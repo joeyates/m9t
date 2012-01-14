@@ -9,7 +9,7 @@ module M9t
     def self.generate_conversions(klass)
       klass.instance_eval do |klass|
         def convert(from, to, value)
-          value * self::CONVERSIONS[from] / self::CONVERSIONS[to]
+          value / self::CONVERSIONS[from] * self::CONVERSIONS[to]
         end
 
         def method_missing(name, *args, &block)
@@ -40,7 +40,7 @@ module M9t
           return false if not self::CONVERSIONS[name.to_sym]
           self.class.instance_exec do
             define_method( name.to_sym ) do | *args |
-              new( args[ 0 ].to_f * self::CONVERSIONS[ name ] )
+              new( args[ 0 ].to_f / self::CONVERSIONS[ name ] )
             end
           end
         end

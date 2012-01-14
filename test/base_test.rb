@@ -4,8 +4,8 @@ require File.expand_path( 'test_helper', File.dirname( __FILE__ ) )
 
 class SomeMeasurement
   DEFAULT_OPTIONS = {:units => :foos, :abbreviated => false, :decimals => 1}
-  CONVERSIONS     = {:foos =>  1.0,
-                     :bars => 42.0}
+  CONVERSIONS     = {:foos =>      1.0,
+                     :bars => 1 / 42.0}
 
   include M9t::Base
 end

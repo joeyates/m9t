@@ -9,10 +9,9 @@ module M9t
   class Speed
     DEFAULT_OPTIONS = {:units => :meters_per_second, :abbreviated => false, :precision => 5}
     SECONDS_PER_HOUR  = 60.0 * 60
-    KMH               = M9t::Distance::CONVERSIONS[:kilometers] / SECONDS_PER_HOUR
-    MPH               = M9t::Distance::CONVERSIONS[:miles] / SECONDS_PER_HOUR
-    KNOTS_TO_KMH      = 1.852
-    KNOTS             = KNOTS_TO_KMH / SECONDS_PER_HOUR * M9t::Distance::CONVERSIONS[:kilometers]
+    KMH               = M9t::Distance::CONVERSIONS[:kilometers] * SECONDS_PER_HOUR
+    MPH               = M9t::Distance::CONVERSIONS[:miles] * SECONDS_PER_HOUR
+    KNOTS             = KMH / 1.852
     CONVERSIONS = {
       :meters_per_second   => 1.0,
       :kilometers_per_hour => KMH,

@@ -10,9 +10,9 @@ module M9t
     DEFAULT_OPTIONS      = {:units => :meters, :abbreviated => false, :precision => 5}
     CONVERSIONS          = {
       :meters     => 1.0,
-      :kilometers => 1000.0,
-      :feet       => 0.3048,
-      :miles      => 1609.344
+      :kilometers => 1.0 / 1000.0,
+      :feet       => 1.0 / 0.3048,
+      :miles      => 1.0 / 1609.344
     }
 
     include M9t::Base
