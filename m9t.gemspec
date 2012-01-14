@@ -14,8 +14,8 @@ gemspec = Gem::Specification.new do |s|
   s.author        = 'Joe Yates'
   s.email         = 'joe.g.yates@gmail.com'
 
-  s.files         = `git ls-files`.map( &:chomp! ).reject { | f | f[ 0 .. 0 ] == '.' }
-  s.test_files    = `git ls-files`.map( &:chomp! ).select { | f | f =~ /_test.rb$/ }
+  s.files         = `git ls-files`.lines.map( &:chomp! ).reject { | f | f[ 0 .. 0 ] == '.' }
+  s.test_files    = `git ls-files`.lines.map( &:chomp! ).select { | f | f =~ /_test.rb$/ }
   s.require_paths = ['lib']
 
   s.rubyforge_project = 'nowarning'
