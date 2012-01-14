@@ -8,8 +8,8 @@ gemspec = Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.version     = M9t::VERSION::STRING
 
-  s.summary     = 'Classes for handling measurement units'
-  s.description = 'Classes for handling measurement units, conversions and translations'
+  s.summary     = 'Measurements and coversions library for Ruby'
+  s.description = 'Measurements and coversions library for Ruby'
 
   s.homepage    = 'https://github.com/joeyates/m9t'
   s.author      = 'Joe Yates'
