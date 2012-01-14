@@ -27,5 +27,5 @@ end
 
 desc "Publish a new version of the gem"
 task :release => :build do
-  `gem push m9t-#{M9t::VERSION::STRING}`
+  `gem push m9t-#{M9t::VERSION::STRING}.gem`
 end
