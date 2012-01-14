@@ -3,9 +3,14 @@ m9t [![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)][Continuous 
 
 *Measurements and coversions library for Ruby*
 
+  * [Source Code]
+  * [API documentation]
+  * [Rubygem]
+  * [Continuous Integration]
+
 [Source Code]: https://github.com/joeyates/m9t "Source code at GitHub"
 [API documentation]: http://rubydoc.info/gems/m9t/frames "RDoc API Documentation at Rubydoc.info"
-[Ruby gem]: http://rubygems.org/gems/m9t "Ruby gem at rubygems.org"
+[Rubygem]: http://rubygems.org/gems/m9t "Ruby gem at rubygems.org"
 [Continuous Integration]: http://travis-ci.org/joeyates/m9t "Build status by Travis-CI"
 
 This package handles the basic units of measure:
