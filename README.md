@@ -1,5 +1,12 @@
-m9t - A Ruby Gem for Measurements
-=================================
+m9t [![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)][Continuous Integration]
+===
+
+*Measurements and coversions library for Ruby*
+
+[Source Code]: https://github.com/joeyates/m9t "Source code at GitHub"
+[API documentation]: http://rubydoc.info/gems/m9t/frames "RDoc API Documentation at Rubydoc.info"
+[Ruby gem]: http://rubygems.org/gems/m9t "Ruby gem at rubygems.org"
+[Continuous Integration]: http://travis-ci.org/joeyates/m9t "Build status by Travis-CI"
 
 This package handles the basic units of measure:
 
@@ -13,8 +20,6 @@ The emphasis is on:
 
 - coherent interface,
 - ease of translation (using i18n).
-
-[![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)](http://travis-ci.org/joeyates/m9t)
 
 Internals
 =========
