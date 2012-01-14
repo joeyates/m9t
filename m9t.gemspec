@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.unshift( File.dirname(__FILE__) + '/lib' )
 require 'm9t/version'
-require 'rake'
 
 gemspec = Gem::Specification.new do |s|
   s.name        = 'm9t'
@@ -15,7 +14,7 @@ gemspec = Gem::Specification.new do |s|
   s.author      = 'Joe Yates'
   s.email       = 'joe.g.yates@gmail.com'
 
-  s.files         = ['README.rdoc', 'COPYING', 'Rakefile'] + Rake::FileList['{lib,test}/**/*.rb'] + FileList['locales/**/*.{rb,yml}']
+  s.files         = `git ls-files`.map( &:chomp! ).reject{ | f | f[ 0 .. 0 ] == '.' }
   s.require_paths = ['lib']
 
   s.add_dependency 'rake'                  if RUBY_VERSION < '1.9'
