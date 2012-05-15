@@ -1,7 +1,6 @@
 # encoding: utf-8
-require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
-require File.join(File.expand_path(File.dirname(__FILE__)), 'distance')
+require 'm9t/distance'
 
 module M9t
 
@@ -26,3 +25,4 @@ module M9t
   end
 
 end
+

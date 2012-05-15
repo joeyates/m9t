@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
 
 # Monkey patch I18n
@@ -23,3 +22,4 @@ module I18n
     integers + decimal_separator + decimal
   end
 end
+

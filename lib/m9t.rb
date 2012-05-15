@@ -22,7 +22,6 @@
 #++
 
 # encoding: utf-8
-require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
 
 locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
@@ -45,3 +44,4 @@ module M9t
   end
 
 end
+
