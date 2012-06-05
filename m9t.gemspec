@@ -20,8 +20,7 @@ gemspec = Gem::Specification.new do |s|
 
   s.rubyforge_project = 'nowarning'
 
-  s.add_dependency 'rake'                  if RUBY_VERSION < '1.9'
-  s.add_dependency 'rake', '~> 0.8.7'      if RUBY_VERSION > '1.9'
+  s.add_dependency 'rake'
   s.add_dependency 'i18n', '>= 0.3.5'
 
   s.add_development_dependency 'rcov'      if RUBY_VERSION < '1.9'
