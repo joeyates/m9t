@@ -1,5 +1,7 @@
-.rvmrc
+.bundle
 coverage
 doc
-pkg
 Gemfile.lock
+pkg
+.rbenv-version
+.rvmrc
