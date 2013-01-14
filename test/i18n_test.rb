@@ -21,6 +21,11 @@ class TestI18nMonkeyPatching < Test::Unit::TestCase
     assert_equal(',', I18n.t('numbers.decimal_separator'))
   end
 
+  def test_german_loaded
+    I18n.locale = :de
+    assert_equal('Meile', I18n.t('units.distance.miles.full.one'))
+  end
+
   def test_localize_float_default
     assert_equal('1.500000', I18n.localize_float(1.5))
   end
