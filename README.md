@@ -76,11 +76,15 @@ Coverage
 
 ruby 1.8.x:
 
-    $ rake rcov
+```shell
+$ rake rcov
+```
 
 ruby 1.9.x:
 
-    $ COVERAGE=1 rake test
+```shell
+$ COVERAGE=1 rake test
+```
 
 Alternatives
 ============
