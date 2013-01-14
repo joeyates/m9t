@@ -91,6 +91,12 @@ Alternatives
   - Monkey patches a lot of core classes:
     - Adds methods to e.g. Object.
 
+Contributors
+============
+
+* [Joe Yates](https://github.com/joeyates)
+* [Florian Egermann and Mathias Wollin](https://github.com/math)
+
 License
 =======
 
