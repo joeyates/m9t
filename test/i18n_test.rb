@@ -3,10 +3,6 @@
 require File.expand_path( 'test_helper', File.dirname( __FILE__ ) )
 
 class TestI18nMonkeyPatching < Test::Unit::TestCase
-
-  def setup
-  end
-
   def test_translations_loaded
     I18n.locale = :en
     assert_equal('.', I18n.t('numbers.decimal_separator'))
