@@ -22,5 +22,5 @@ class TestI18nMonkeyPatching < Test::Unit::TestCase
     I18n.locale = :it
     assert_equal('1,5', I18n.localize_float(1.5, {:format => '%0.1f'}))
   end
-
 end
+
