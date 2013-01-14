@@ -11,9 +11,12 @@ class TestI18nMonkeyPatching < Test::Unit::TestCase
     I18n.locale = @old_locale
   end
 
-  def test_translations_loaded
+  def test_english_loaded
     I18n.locale = :en
     assert_equal('.', I18n.t('numbers.decimal_separator'))
+  end
+
+  def test_italian_loaded
     I18n.locale = :it
     assert_equal(',', I18n.t('numbers.decimal_separator'))
   end
