@@ -74,7 +74,7 @@ Testing
 Coverage
 --------
 
-ruby 1.8.x:
+ruby 1.8.x (not jruby):
 
 ```shell
 $ rake rcov

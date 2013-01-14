@@ -12,7 +12,7 @@ Rake::TestTask.new do |t|
   t.verbose    = true
 end
 
-if RUBY_VERSION < '1.9'
+if RUBY_VERSION < '1.9' and RUBY_PLATFORM != 'java'
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |t|
     t.test_files = FileList['test/*_test.rb']
