@@ -42,31 +42,41 @@ Interface
 
 new: accepts the S.I. unit as a parameter:
 
-    height = M9t::Distance.new(1.75)
+```ruby
+height = M9t::Distance.new(1.75)
+```
 
 to_f: returns the decimal value(s):
 
-    height.to_f -> 1.75
+```ruby
+height.to_f -> 1.75
+```
 
 other units:
 there are class methods named after each known unit,
 which take values in that unit
 (actually, they are defined as needed):
 
-    marathon = M9t::Distance.miles(26.21875)
-    marathon.to_f -> 42194.988
+```ruby
+marathon = M9t::Distance.miles(26.21875)
+marathon.to_f -> 42194.988
+```
 
 to_s: returns a localized string with units:
 
-    I18n.locale = :it
-    puts M9t::Distance.new(3).to_s -> '3 metri'
+```ruby
+I18n.locale = :it
+puts M9t::Distance.new(3).to_s -> '3 metri'
+```
 
 Class methods for conversion
 ============================
 
 Methods are available for conversion between any pair of units:
 
-    M9t::Distance.miles_to_meters(26.21875) -> 42194.988
+```ruby
+M9t::Distance.miles_to_meters(26.21875) -> 42194.988
+```
 
 Testing
 =======
@@ -108,3 +118,4 @@ Dual license:
 
 - MIT License: see MIT-LICENSE.txt,
 - GPL version 3: see GPL-LICENSE.txt
+
