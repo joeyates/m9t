@@ -1,7 +1,8 @@
 require 'bundler'
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 
-$:.unshift( File.dirname(__FILE__) + '/lib' )
+$:.unshift(File.dirname(__FILE__) + '/lib')
 require 'm9t'
 
 task :default => :test
@@ -18,15 +19,5 @@ if RUBY_VERSION < '1.9' and RUBY_PLATFORM != 'java'
     t.test_files = FileList['test/*_test.rb']
     t.rcov_opts  << '--exclude /gems/'
   end
-end
-
-desc "Build the gem"
-task :build do
-  `gem build m9t.gemspec`
-end
-
-desc "Publish a new version of the gem"
-task :release => :build do
-  `gem push m9t-#{M9t::VERSION::STRING}.gem`
 end
 
