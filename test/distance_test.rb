@@ -93,7 +93,7 @@ class TestM9tDistance < Test::Unit::TestCase
     assert_equal(0.0003, M9t::Distance.new(0.3).to_kilometers)
   end
 
-  def test_instance_to_kilometers
+  def test_instance_to_kilometers_with_delta
     assert_in_delta(0.98425, M9t::Distance.new(0.3).to_feet, 0.00001)
   end
 
