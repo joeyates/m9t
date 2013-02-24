@@ -1,9 +1,4 @@
-.bundle
-coverage
-doc
-Gemfile.lock
-pkg
-.rbenv-version
-.rvmrc
-/vendor
-
+/coverage/
+/Gemfile.lock
+/pkg/
+/vendor/bundle/
