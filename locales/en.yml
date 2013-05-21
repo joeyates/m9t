@@ -22,6 +22,7 @@ en:
           zero: miles
           one: mile
           other: miles
+        abbreviated: mi
       feet:
         full:
           one: foot
@@ -35,6 +36,12 @@ en:
           other: degrees
         abbreviated: °
     speed:
+      miles_per_hour:
+        full:
+          zero: miles per hour
+          one: mile per hour
+          other: miles per hour
+        abbreviated: mph
       meters_per_second:
         full:
           zero: meters per second
@@ -52,6 +59,12 @@ en:
           one: knot
           other: knots
     temperature:
+      fahrenheit:
+        full:
+          zero: degrees
+          one: degree
+          other: degrees
+        abbreviated: °F
       degrees:
         full:
           zero: degrees
