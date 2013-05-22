@@ -1,4 +1,6 @@
+/bin/
 /coverage/
 /Gemfile.lock
 /pkg/
 /vendor/bundle/
+
