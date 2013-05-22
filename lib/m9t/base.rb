@@ -11,32 +11,60 @@ module M9t
           value / self::CONVERSIONS[from] * self::CONVERSIONS[to]
         end
 
+        # Define class conversion methods as required
         def method_missing(name, *args, &block)
-          # Define class conversion methods as required
-          if name.to_s =~ /^(\w+)_to_(\w+)$/
-            return send(name, args[0]) if define_conversion($1, $2)
+          from, to = extract_from_and_to(name)
+          if from
+            if legal_conversion?(from, to)
+              define_conversion(from, to)
+              return send(name, args[0])
+            end
           end
-          return send(name, args[0]) if define_constructor(name)
-          raise "Method '#{ name }' unknown" # TODO use standard exception
+          if legal_constructor?(name)
+            define_constructor(name)
+            return send(name, args[0])
+          end
+          super
+        end
+
+        def respond_to?(name, include_all = false)
+          from, to = extract_from_and_to(name)
+          if from
+            return true if legal_conversion?(from, to)
+          end
+          return legal_constructor?(name)
+          super
         end
 
         private
 
+        def extract_from_and_to(name)
+          if name.to_s =~ /^(\w+)_to_(\w+)$/
+            [$1, $2]
+          else
+            nil
+          end
+        end
+
+        def legal_conversion?(from, to)
+          self::CONVERSIONS.include?(from.to_sym) and self::CONVERSIONS.include?(to.to_sym)
+        end
+
         def define_conversion(from, to)
-          return false if not self::CONVERSIONS[from.to_sym]
-          return false if not self::CONVERSIONS[to.to_sym]
           self.class.instance_exec do
             define_method("#{ from }_to_#{ to }") do |value|
               convert(from.to_sym, to.to_sym, value)
             end
           end
-          true
+        end
+
+        def legal_constructor?(name)
+          self::CONVERSIONS.include?(name.to_sym)
         end
 
         # Define klass.unit(value) which converts the parameter
         # from the unit and returns an instance
         def define_constructor(name)
-          return false if not self::CONVERSIONS[name.to_sym]
           self.class.instance_exec do
             define_method( name.to_sym ) do | *args |
               new( args[ 0 ].to_f / self::CONVERSIONS[ name ] )
@@ -94,10 +122,18 @@ module M9t
 
     # define conversion instance methods as required
     def method_missing(name, *args, &block)
-      if name.to_s =~ /^to_(\w+)$/
-        return send(name) if define_conversion($1)
+      to = extract_to(name)
+      if to and legal_conversion?(to)
+        define_conversion(to)
+        return send(name)
       end
-      raise "Method '#{ name }' unknown" # TODO use standard exception
+      super
+    end
+
+    def respond_to?(name, include_all = false)
+      to = extract_to(name)
+      return true if to and legal_conversion?(to)
+      super
     end
 
     # Returns the string representation of the measurement,
@@ -121,14 +157,24 @@ module M9t
       raise M9t::UnitError.new("Unknown units '#{ units }'. Known: #{ self.class::CONVERSIONS.keys.collect{|unit| unit.to_s}.join(', ') }")
     end
 
+    def extract_to(name)
+      if name.to_s =~ /^to_(\w+)$/
+        $1
+      else
+        nil
+      end
+    end
+
+    def legal_conversion?(to)
+      self.class::CONVERSIONS.include?(to.to_sym)
+    end
+
     def define_conversion(to)
-      return false if not self.class::CONVERSIONS[to.to_sym]
       self.class.instance_exec do
         define_method("to_#{ to }") do
           self.class.convert(self.class.default_unit, to.to_sym, self.to_f)
         end
       end
-      true
     end
 
   end

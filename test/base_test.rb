@@ -27,7 +27,7 @@ class TestM9tBase < Test::Unit::TestCase
   end
 
   def test_class_method_missing_fails_on_unknown_units
-    assert_raise(RuntimeError) do
+    assert_raise(NoMethodError) do
       SomeMeasurement.bazs_to_bars(3.0)
     end
   end
@@ -41,7 +41,7 @@ class TestM9tBase < Test::Unit::TestCase
 
   def test_instance_method_missing_fails_on_unknown_units
     some = SomeMeasurement.new(3.0)
-    assert_raise(RuntimeError) do
+    assert_raise(NoMethodError) do
       some.to_bazs(3.0)
     end
   end
