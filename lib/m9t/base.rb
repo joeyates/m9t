@@ -2,9 +2,7 @@
 require 'i18n'
 
 module M9t
-
   module Base
-
     def self.generate_conversions(klass)
       klass.instance_eval do |klass|
         def convert(from, to, value)
@@ -171,12 +169,11 @@ module M9t
 
     def define_conversion(to)
       self.class.instance_exec do
-        define_method("to_#{ to }") do
+        define_method("to_#{to}") do
           self.class.convert(self.class.default_unit, to.to_sym, self.to_f)
         end
       end
     end
-
   end
-
 end
+
