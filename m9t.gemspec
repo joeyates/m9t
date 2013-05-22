@@ -23,6 +23,7 @@ gemspec = Gem::Specification.new do |s|
   s.add_dependency 'rake'
   s.add_dependency 'i18n', '>= 0.3.5'
 
+  s.add_development_dependency 'rspec'
   if RUBY_VERSION < '1.9'
     if RUBY_PLATFORM != 'java'
       s.add_development_dependency 'rcov'

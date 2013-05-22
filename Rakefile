@@ -1,11 +1,10 @@
-require 'bundler'
+#!/usr/bin/env rake
 require 'bundler/gem_tasks'
 require 'rake/testtask'
+require 'rcov/rcovtask' if RUBY_VERSION < '1.9'
+require 'rspec/core/rake_task'
 
-$:.unshift(File.dirname(__FILE__) + '/lib')
-require 'm9t'
-
-task :default => :test
+task :default => :spec
 
 Rake::TestTask.new do |t|
   t.libs       << 'test'
@@ -13,11 +12,15 @@ Rake::TestTask.new do |t|
   t.verbose    = true
 end
 
-if RUBY_VERSION < '1.9' and RUBY_PLATFORM != 'java'
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |t|
-    t.test_files = FileList['test/*_test.rb']
-    t.rcov_opts  << '--exclude /gems/'
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = 'spec/**/*_spec.rb'
+end
+
+if RUBY_VERSION < '1.9'
+  RSpec::Core::RakeTask.new('spec:rcov') do |t|
+    t.pattern   = 'spec/**/*_spec.rb'
+    t.rcov      = true
+    t.rcov_opts = ['--exclude', 'spec/,/gems/']
   end
 end
 
