@@ -9,5 +9,5 @@ rvm:
 branches:
   only:
     - master
-script: "bundle exec rake test"
+script: "bundle exec rake spec"
 
