@@ -2,7 +2,7 @@
 require 'rspec'
 require 'rspec/autorun'
 
-if RUBY_VERSION > '1.9'
+if RUBY_VERSION > '1.9' and RUBY_PLATFORM != 'java'
   require 'simplecov'
   if ENV['COVERAGE']
     SimpleCov.start do
