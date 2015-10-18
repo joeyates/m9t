@@ -31,7 +31,6 @@ module M9t
             return true if legal_conversion?(from, to)
           end
           return legal_constructor?(name)
-          super
         end
 
         private
