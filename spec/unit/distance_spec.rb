@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'm9t/distance'
 
 describe M9t::Distance do
   context 'class methods' do

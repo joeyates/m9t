@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'm9t/temperature'
 
 describe M9t::Temperature do
   context 'constants' do

@@ -1,6 +1,10 @@
 # encoding: utf-8
 require 'i18n'
 
+locales_path = File.expand_path(File.join('..', '..', 'locales'), File.dirname(__FILE__))
+I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
+I18n.reload!
+
 # Monkey patch I18n
 module I18n
 

@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'm9t/i18n'
 
 describe I18n do
   before do

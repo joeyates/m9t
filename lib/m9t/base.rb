@@ -1,5 +1,6 @@
 # encoding: utf-8
-require 'i18n'
+require 'm9t/errors'
+require 'm9t/i18n'
 
 module M9t
   module Base

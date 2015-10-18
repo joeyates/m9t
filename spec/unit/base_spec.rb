@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'spec_helper'
+require 'm9t/base'
 
 class SomeMeasurement
   DEFAULT_OPTIONS = {

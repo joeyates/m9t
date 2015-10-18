@@ -22,26 +22,9 @@
 #++
 
 # encoding: utf-8
-require 'i18n'
-
-locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
-I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
-I18n.reload!
-
-libs = %w( base direction distance i18n pressure speed temperature version )
-libs.each do | library |
-  require "m9t/#{ library }"
+libs = %w(i18n base direction distance pressure speed temperature version)
+libs.each do |library|
+  require "m9t/#{library}"
 end
 
-module M9t
-
-  # Base class for all M9t exceptions
-  class M9tError < StandardError
-  end
-
-  # Raised when a M9t class receives an unrecogized ':units' value
-  class UnitError < M9tError
-  end
-
-end
-
+module M9t; end

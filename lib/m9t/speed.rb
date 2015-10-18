@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'i18n'
+require 'm9t/base'
 require 'm9t/distance'
 
 module M9t
