@@ -5,7 +5,7 @@ require 'm9t/i18n'
 module M9t
   module Base
     def self.generate_conversions(klass)
-      klass.instance_eval do |klass|
+      klass.instance_eval do
         def convert(from, to, value)
           value / self::CONVERSIONS[from] * self::CONVERSIONS[to]
         end
@@ -26,26 +26,21 @@ module M9t
           super
         end
 
-        def respond_to?(name, include_all = false)
+        def respond_to?(name, _include_all = false)
           from, to = extract_from_and_to(name)
-          if from
-            return true if legal_conversion?(from, to)
-          end
-          return legal_constructor?(name)
+          return true if from && legal_conversion?(from, to)
+          legal_constructor?(name)
         end
 
         private
 
         def extract_from_and_to(name)
-          if name.to_s =~ /^(\w+)_to_(\w+)$/
-            [$1, $2]
-          else
-            nil
-          end
+          name.to_s.scan(/^(\w+)_to_(\w+)$/)[0]
         end
 
         def legal_conversion?(from, to)
-          self::CONVERSIONS.include?(from.to_sym) and self::CONVERSIONS.include?(to.to_sym)
+          self::CONVERSIONS.include?(from.to_sym) &&
+            self::CONVERSIONS.include?(to.to_sym)
         end
 
         def define_conversion(from, to)
@@ -64,7 +59,7 @@ module M9t
         # from the unit and returns an instance
         def define_constructor(name)
           self.class.instance_exec do
-            define_method(name.to_sym) do | *args |
+            define_method(name.to_sym) do |*args|
               new(args[0].to_f / self::CONVERSIONS[name])
             end
           end
@@ -81,14 +76,15 @@ module M9t
           end
         end
 
-        # Returns the classes current options - see the specific class for defaults
+        # Returns the classes current options - see the specific class for
+        # defaults
         def options
           @options
         end
 
         # Reloads the class' default options
         def reset_options!
-          @options = self::DEFAULT_OPTIONS.clone # 'self::' is necessary with ruby 1.8
+          @options = self::DEFAULT_OPTIONS.clone
         end
 
         # The name used for i18n translations
@@ -112,7 +108,7 @@ module M9t
     end
 
     attr_reader :value, :options
-    alias :to_f :value
+    alias_method :to_f, :value
 
     def initialize(value)
       @value = value.to_f
@@ -121,16 +117,16 @@ module M9t
     # define conversion instance methods as required
     def method_missing(name, *args, &block)
       to = extract_to(name)
-      if to and legal_conversion?(to)
+      if to && legal_conversion?(to)
         define_conversion(to)
         return send(name)
       end
       super
     end
 
-    def respond_to?(name, include_all = false)
+    def respond_to?(name, _include_all = false)
       to = extract_to(name)
-      return true if to and legal_conversion?(to)
+      return true if to && legal_conversion?(to)
       super
     end
 
@@ -138,34 +134,35 @@ module M9t
     # taking into account locale, desired units and abbreviation.
     def to_s(options = {})
       options = self.class.options.merge(options)
-      if not self.class::CONVERSIONS.has_key?(options[:units])
+      unless self.class::CONVERSIONS.include?(options[:units])
         units_error(options[:units])
       end
-      value_in_units = self.send("to_#{options[:units]}")
+      value_in_units = send("to_#{options[:units]}")
       localized_value = I18n.localize_float(
-        value_in_units, {format: "%0.#{options[:precision]}f"}
+        value_in_units, format: "%0.#{options[:precision]}f"
       )
 
-      key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
-      options[:abbreviated] ? key += '.abbreviated' : key += '.full'
-      unit = I18n.t(key, {count: value_in_units})
+      key = i18n_key(options)
+      unit = I18n.t(key, count: value_in_units)
 
       "#{localized_value}%s#{unit}" % (options[:abbreviated] ? '' : ' ')
     end
 
     private
 
+    def i18n_key(options = {})
+      key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
+      options[:abbreviated] ? key += '.abbreviated' : key += '.full'
+      key
+    end
+
     def units_error(units)
-      known = self.class::CONVERSIONS.keys.collect{|unit| unit.to_s}.join(', ')
-      raise M9t::UnitError.new("Unknown units '#{units}'. Known: #{known}")
+      known = self.class::CONVERSIONS.keys.collect(&:to_s).join(', ')
+      fail M9t::UnitError, "Unknown units '#{units}'. Known: #{known}"
     end
 
     def extract_to(name)
-      if name.to_s =~ /^to_(\w+)$/
-        $1
-      else
-        nil
-      end
+      name.to_s[/^to_(\w+)$/, 1]
     end
 
     def legal_conversion?(to)
@@ -175,7 +172,7 @@ module M9t
     def define_conversion(to)
       self.class.instance_exec do
         define_method("to_#{to}") do
-          self.class.convert(self.class.default_unit, to.to_sym, self.to_f)
+          self.class.convert(self.class.default_unit, to.to_sym, to_f)
         end
       end
     end
