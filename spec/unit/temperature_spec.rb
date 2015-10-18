@@ -2,6 +2,11 @@
 require 'm9t/temperature'
 
 describe M9t::Temperature do
+  CONVERSIONS = [
+    [:kelvin, 100, 373.15],
+    [:fahrenheit, 100, 212.0],
+  ]
+
   context 'constants' do
     specify 'absolute zero' do
       expect(M9t::Temperature::ABSOLUTE_ZERO).to be_within(0.0001).of(-273.15)
@@ -32,39 +37,44 @@ describe M9t::Temperature do
     end
 
     context 'conversion factories' do
-      [
-        [:kelvin, -273.15],
-        [:fahrenheit, -17.77777778],
-      ].each do |unit, expected|
-        specify unit do
-          expect(M9t::Temperature.send(unit, 0.0).value).to be_within(expected.abs / 1000.0).of(expected)
+      CONVERSIONS.each do |unit, degrees, other|
+        specify ".#{unit}" do
+          expect(M9t::Temperature.send(unit, other).value).
+            to be_within(degrees.abs / 1000.0).of(degrees)
         end
       end
     end
 
     context 'conversions' do
-      [
-        [:kelvin, 273.15],
-        [:fahrenheit, 32.0],
-      ].each do |unit, expected|
-        method = :"to_#{unit}"
-        specify method do
-          expect(M9t::Temperature.send(method, 0)).to eq(expected)
+      context 'from degrees' do
+        CONVERSIONS.each do |unit, degrees, other|
+          method = :"to_#{unit}"
+          specify method do
+            expect(M9t::Temperature.send(method, degrees)).to eq(other)
+          end
+        end
+      end
+
+      context 'to degrees' do
+        CONVERSIONS.each do |unit, degrees, other|
+          method = :"#{unit}_to_degrees"
+          specify method do
+            expect(M9t::Temperature.send(method, other)).to eq(degrees)
+          end
         end
       end
     end
   end
 
   context 'conversions' do
-    subject { M9t::Temperature.new(100) }
+    context 'from degrees' do
+      CONVERSIONS.each do |unit, degrees, other|
+        subject { M9t::Temperature.new(degrees) }
 
-    [
-      [:kelvin, 373.15],
-      [:fahrenheit, 212.0],
-    ].each do |unit, expected|
-      method = :"to_#{unit}"
-      specify method do
-        expect(subject.send(method)).to be_within(expected.abs / 1000.0).of(expected)
+        method = :"to_#{unit}"
+        specify method do
+          expect(subject.send(method)).to be_within(other.abs / 1000.0).of(other)
+        end
       end
     end
   end
