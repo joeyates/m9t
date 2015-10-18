@@ -78,4 +78,3 @@ describe M9t::Base do
     end
   end
 end
-

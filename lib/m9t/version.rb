@@ -1,5 +1,4 @@
 module M9t
-
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 3
@@ -7,6 +6,4 @@ module M9t
 
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
-
 end
-

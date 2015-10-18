@@ -50,7 +50,7 @@ module M9t
 
         def define_conversion(from, to)
           self.class.instance_exec do
-            define_method("#{ from }_to_#{ to }") do |value|
+            define_method("#{from}_to_#{to}") do |value|
               convert(from.to_sym, to.to_sym, value)
             end
           end
@@ -64,8 +64,8 @@ module M9t
         # from the unit and returns an instance
         def define_constructor(name)
           self.class.instance_exec do
-            define_method( name.to_sym ) do | *args |
-              new( args[ 0 ].to_f / self::CONVERSIONS[ name ] )
+            define_method(name.to_sym) do | *args |
+              new(args[0].to_f / self::CONVERSIONS[name])
             end
           end
         end
@@ -114,7 +114,7 @@ module M9t
     attr_reader :value, :options
     alias :to_f :value
 
-    def initialize( value )
+    def initialize(value)
       @value = value.to_f
     end
 
@@ -136,23 +136,28 @@ module M9t
 
     # Returns the string representation of the measurement,
     # taking into account locale, desired units and abbreviation.
-    def to_s( options = {} )
-      options = self.class.options.merge( options )
-      units_error( options[ :units ] ) if not self.class::CONVERSIONS.has_key?( options[ :units ] )
-      value_in_units = self.send("to_#{ options[:units] }")
-      localized_value = I18n.localize_float(value_in_units, {format: "%0.#{ options[:precision] }f"})
+    def to_s(options = {})
+      options = self.class.options.merge(options)
+      if not self.class::CONVERSIONS.has_key?(options[:units])
+        units_error(options[:units])
+      end
+      value_in_units = self.send("to_#{options[:units]}")
+      localized_value = I18n.localize_float(
+        value_in_units, {format: "%0.#{options[:precision]}f"}
+      )
 
       key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
       options[:abbreviated] ? key += '.abbreviated' : key += '.full'
       unit = I18n.t(key, {count: value_in_units})
 
-      "#{ localized_value }%s#{ unit }" % (options[:abbreviated] ? '' : ' ')
+      "#{localized_value}%s#{unit}" % (options[:abbreviated] ? '' : ' ')
     end
 
     private
 
     def units_error(units)
-      raise M9t::UnitError.new("Unknown units '#{ units }'. Known: #{ self.class::CONVERSIONS.keys.collect{|unit| unit.to_s}.join(', ') }")
+      known = self.class::CONVERSIONS.keys.collect{|unit| unit.to_s}.join(', ')
+      raise M9t::UnitError.new("Unknown units '#{units}'. Known: #{known}")
     end
 
     def extract_to(name)
@@ -176,4 +181,3 @@ module M9t
     end
   end
 end
-

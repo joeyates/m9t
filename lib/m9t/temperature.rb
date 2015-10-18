@@ -2,12 +2,13 @@
 require 'm9t/base'
 
 module M9t
-
   # Represents a temperature
   # Using degrees (celcius), not kelvin, as default unit
   class Temperature
-    DEFAULT_OPTIONS      = {units: :degrees, abbreviated: false, precision: 5}
-    CONVERSIONS          = {
+    DEFAULT_OPTIONS = {
+      units: :degrees, abbreviated: false, precision: 5
+    }
+    CONVERSIONS  = {
       degrees:   1.0,
       kelvin:    nil,
       fahrenheit: nil
@@ -19,14 +20,13 @@ module M9t
     include M9t::Base
 
     class << self
-
       # Accepts a value in kelvin and returns the equivalent M9t::Temperature
-      def kelvin( kelvin )
-        new( kelvin.to_f + ABSOLUTE_ZERO )
+      def kelvin(kelvin)
+        new(kelvin.to_f + ABSOLUTE_ZERO)
       end
 
-      def fahrenheit( fahrenheit )
-        new( fahrenheit_to_degrees( fahrenheit ) )
+      def fahrenheit(fahrenheit)
+        new(fahrenheit_to_degrees(fahrenheit))
       end
 
       # Converts degrees to kelvin
@@ -48,7 +48,6 @@ module M9t
       def fahrenheit_to_degrees(fahrenheit)
         (fahrenheit.to_f - 32) * 5.0 / 9.0
       end
-
     end
 
     alias :to_degrees :value
@@ -61,8 +60,5 @@ module M9t
     def to_fahrenheit
       self.class.to_fahrenheit(@value)
     end
-
   end
-
 end
-

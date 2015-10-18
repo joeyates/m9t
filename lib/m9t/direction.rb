@@ -2,7 +2,6 @@
 require 'm9t/base'
 
 module M9t
-
   # Represents a geographical direction
   class Direction
     DEFAULT_OPTIONS = {units: :degrees, abbreviated: false, decimals: 5}
@@ -18,7 +17,6 @@ module M9t
     include M9t::Base
 
     class << self
-
       # Given a value in degrees, returns the nearest (localized) compass direction
       #  M9t::Directions.to_compass(42) => 'NE'
       def degrees_to_compass(degrees)
@@ -34,7 +32,7 @@ module M9t
       #  M9t::Direction.compass('NE') => #<M9t::Direction:0xb76cc750 @value=45.0, @options={:units=>:degrees, :decimals=>5, :abbreviated=>false}>
       def compass(compass_direction)
         sector = I18n.t(self.measurement_name + '.sectors').find_index(compass_direction)
-        raise "Compass direction '#{ compass_direction }' not recognised" if sector.nil?
+        raise "Compass direction '#{compass_direction}' not recognised" if sector.nil?
         new(sector.to_f * COMPASS_SECTOR_DEGREES)
       end
 
@@ -50,7 +48,6 @@ module M9t
           degrees
         end
       end
-
     end
 
     # Handles the special case where compass directions are the desired output.
@@ -65,7 +62,5 @@ module M9t
     def to_compass
       self.class.degrees_to_compass(@value)
     end
-
   end
-
 end
