@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'spec_helper'
 
 describe M9t::Speed do
   context 'conversion constants' do

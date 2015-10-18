@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'spec_helper'
 
 describe M9t::Distance do
   context 'class methods' do
@@ -13,7 +12,7 @@ describe M9t::Distance do
       end
 
       it 'not abbreviated' do
-        expect(M9t::Distance.options[:abbreviated]).to be_false
+        expect(M9t::Distance.options[:abbreviated]).to be_falsey
       end
 
       it 'units: meters' do

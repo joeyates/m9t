@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'spec_helper'
 
 describe M9t::Direction do
   before do
@@ -19,7 +18,7 @@ describe M9t::Direction do
 
     context 'abbreviated' do
       it 'is false' do
-        expect(M9t::Direction.options[:abbreviated]).to be_false
+        expect(M9t::Direction.options[:abbreviated]).to be_falsey
       end
     end
 
