@@ -84,27 +84,27 @@ describe M9t::Temperature do
 
     specify 'precision' do
       I18n.locale = :en
-      expect(subject.to_s(:precision => 0)).to eq('135 degrees')
+      expect(subject.to_s(precision: 0)).to eq('135 degrees')
     end
 
     specify 'abbreviated, en' do
       I18n.locale = :en
-      expect(subject.to_s(:abbreviated => true, :precision => 0)).to eq('135°C')
+      expect(subject.to_s(abbreviated: true, precision: 0)).to eq('135°C')
     end
 
     specify 'kelvin, en' do
       I18n.locale = :en
-      expect(subject.to_s(:units => :kelvin, :precision => 2)).to eq('408.15 kelvin')
+      expect(subject.to_s(units: :kelvin, precision: 2)).to eq('408.15 kelvin')
     end
 
     specify 'kelvin, it' do
       I18n.locale = :it
-      expect(subject.to_s(:units => :kelvin, :precision => 2)).to eq('408,15 kelvin')
+      expect(subject.to_s(units: :kelvin, precision: 2)).to eq('408,15 kelvin')
     end
 
     specify 'abbreviated, kelvin, it' do
       I18n.locale = :it
-      expect(subject.to_s(:units => :kelvin, :abbreviated => true, :precision => 2)).to eq('408,15K')
+      expect(subject.to_s(units: :kelvin, abbreviated: true, precision: 2)).to eq('408,15K')
     end
   end
 end

@@ -12,7 +12,7 @@ describe M9t::Speed do
     it 'gives an error for unknown units' do
       speed = M9t::Speed.new(10)
       expect {
-        speed.to_s( :units => :foos )
+        speed.to_s(units: :foos)
       }.to raise_error(M9t::UnitError)
     end
   end
@@ -83,21 +83,21 @@ describe M9t::Speed do
 
     specify 'precision' do
       I18n.locale = :en
-      expect(subject.to_s(:precision => 0)).to eq('135 meters per second')
+      expect(subject.to_s(precision: 0)).to eq('135 meters per second')
     end
 
     specify 'abbreviated' do
-      expect(subject.to_s(:abbreviated => true, :precision => 0)).to eq('135m/s')
+      expect(subject.to_s(abbreviated: true, precision: 0)).to eq('135m/s')
     end
 
     specify 'units: knots, en' do
       I18n.locale = :en
-      expect(subject.to_s(:units => :knots, :precision => 0)).to eq('262 knots')
+      expect(subject.to_s(units: :knots, precision: 0)).to eq('262 knots')
     end
 
     specify 'units: knots, it' do
       I18n.locale = :it
-      expect(subject.to_s(:units => :knots, :precision => 0)).to eq('262 nodi')
+      expect(subject.to_s(units: :knots, precision: 0)).to eq('262 nodi')
     end
   end
 end

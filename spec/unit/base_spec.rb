@@ -3,13 +3,13 @@ require 'm9t/base'
 
 class SomeMeasurement
   DEFAULT_OPTIONS = {
-    :units       => :foos,
-    :abbreviated => false,
-    :decimals    => 1
+    units:       :foos,
+    abbreviated: false,
+    decimals:    1
   }
   CONVERSIONS = {
-    :foos =>      1.0,
-    :bars => 1 / 42.0
+    foos: 1.0,
+    bars: 1 / 42.0
   }
 
   include M9t::Base

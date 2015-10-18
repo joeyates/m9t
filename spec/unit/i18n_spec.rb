@@ -49,7 +49,7 @@ describe I18n do
 
     it 'accepts a format indicator' do
       I18n.locale = :en
-      expect(I18n.localize_float(1.5, {:format => '%0.1f'})).to eq('1.5')
+      expect(I18n.localize_float(1.5, {format: '%0.1f'})).to eq('1.5')
     end
   end
 end

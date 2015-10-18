@@ -1,6 +1,6 @@
 require 'rspec'
 
-if RUBY_VERSION > '1.9' and RUBY_PLATFORM != 'java'
+if RUBY_PLATFORM != 'java'
   require 'simplecov'
   if ENV['COVERAGE']
     SimpleCov.start do

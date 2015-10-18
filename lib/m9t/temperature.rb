@@ -6,11 +6,11 @@ module M9t
   # Represents a temperature
   # Using degrees (celcius), not kelvin, as default unit
   class Temperature
-    DEFAULT_OPTIONS      = {:units => :degrees, :abbreviated => false, :precision => 5}
+    DEFAULT_OPTIONS      = {units: :degrees, abbreviated: false, precision: 5}
     CONVERSIONS          = {
-      :degrees   => 1.0,
-      :kelvin    => nil,
-      :fahrenheit => nil
+      degrees:   1.0,
+      kelvin:    nil,
+      fahrenheit: nil
     }
 
     # Conversions

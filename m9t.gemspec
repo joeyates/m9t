@@ -24,10 +24,5 @@ gemspec = Gem::Specification.new do |s|
   s.add_dependency 'i18n', '>= 0.3.5'
 
   s.add_development_dependency 'rspec', '>= 3.0.0'
-  if RUBY_VERSION < '1.9'
-    s.add_development_dependency 'rcov' if RUBY_PLATFORM != 'java'
-  else
-    s.add_development_dependency 'simplecov' if RUBY_PLATFORM != 'java'
-  end
+  s.add_development_dependency 'simplecov' if RUBY_PLATFORM != 'java'
 end
-

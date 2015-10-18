@@ -140,11 +140,11 @@ module M9t
       options = self.class.options.merge( options )
       units_error( options[ :units ] ) if not self.class::CONVERSIONS.has_key?( options[ :units ] )
       value_in_units = self.send("to_#{ options[:units] }")
-      localized_value = I18n.localize_float(value_in_units, {:format => "%0.#{ options[:precision] }f"})
+      localized_value = I18n.localize_float(value_in_units, {format: "%0.#{ options[:precision] }f"})
 
       key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
       options[:abbreviated] ? key += '.abbreviated' : key += '.full'
-      unit = I18n.t(key, {:count => value_in_units})
+      unit = I18n.t(key, {count: value_in_units})
 
       "#{ localized_value }%s#{ unit }" % (options[:abbreviated] ? '' : ' ')
     end

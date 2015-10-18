@@ -156,7 +156,7 @@ describe M9t::Direction do
       subject { M9t::Direction.new(135) }
 
       it 'uses the symbol' do
-        expect(subject.to_s(:abbreviated => true)).to eq('135°')
+        expect(subject.to_s(abbreviated: true)).to eq('135°')
       end
     end
 
@@ -164,12 +164,12 @@ describe M9t::Direction do
       subject { M9t::Direction.new(225) }
 
       it 'works' do
-        expect(subject.to_s(:units => :compass)).to eq('SW')
+        expect(subject.to_s(units: :compass)).to eq('SW')
       end
 
       it 'translates' do
         I18n.locale = :it
-        expect(subject.to_s(:units => :compass)).to eq('SO')
+        expect(subject.to_s(units: :compass)).to eq('SO')
       end
     end
   end

@@ -76,32 +76,32 @@ describe M9t::Distance do
 
     it 'handles singluar' do
       distance = M9t::Distance.new(1)
-      expect(distance.to_s(:precision => 0)).to eq('1 meter')
+      expect(distance.to_s(precision: 0)).to eq('1 meter')
     end
 
     it 'handles plural' do
       distance = M9t::Distance.new(10)
-      expect(distance.to_s(:precision => 0)).to eq('10 meters')
+      expect(distance.to_s(precision: 0)).to eq('10 meters')
     end
 
     it 'handles abbreviation' do
       distance = M9t::Distance.new(0.3)
-      expect(distance.to_s(:abbreviated => true)).to eq('0.30000m')
+      expect(distance.to_s(abbreviated: true)).to eq('0.30000m')
     end
 
     specify 'units: kilometers' do
       distance = M9t::Distance.new( 156003 )
-      expect(distance.to_s(:precision => 1, :units => :kilometers)).to eq('156.0 kilometers')
+      expect(distance.to_s(precision: 1, units: :kilometers)).to eq('156.0 kilometers')
     end
 
     specify 'units: miles, singular' do
       marathon = M9t::Distance.miles(26.21875)
-      expect(marathon.to_s(:units => :miles, :precision => 0)).to eq('26 miles')
+      expect(marathon.to_s(units: :miles, precision: 0)).to eq('26 miles')
     end
 
     specify 'units: miles, plural' do
       ten_km = M9t::Distance.new(10000)
-      expect(ten_km.to_s(:units => :miles, :precision => 1)).to eq('6.2 miles')
+      expect(ten_km.to_s(units: :miles, precision: 1)).to eq('6.2 miles')
     end
 
     context 'i18n' do
@@ -111,17 +111,17 @@ describe M9t::Distance do
 
       specify 'precision: 0' do
         distance = M9t::Distance.new(10)
-        expect(distance.to_s(:precision => 0)).to eq('10 metri')
+        expect(distance.to_s(precision: 0)).to eq('10 metri')
       end
 
       specify 'units: miles' do
         marathon = M9t::Distance.miles(26.21875)
-        expect(marathon.to_s(:units => :miles, :precision => 0)).to eq('26 miglia')
+        expect(marathon.to_s(units: :miles, precision: 0)).to eq('26 miglia')
       end
 
       specify 'units: miles, precision: 1' do
         ten_km = M9t::Distance.new(10000)
-        expect(ten_km.to_s(:units => :miles, :precision => 1)).to eq('6,2 miglia')
+        expect(ten_km.to_s(units: :miles, precision: 1)).to eq('6,2 miglia')
       end
     end
   end

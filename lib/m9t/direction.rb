@@ -5,10 +5,10 @@ module M9t
 
   # Represents a geographical direction
   class Direction
-    DEFAULT_OPTIONS = {:units => :degrees, :abbreviated => false, :decimals => 5}
+    DEFAULT_OPTIONS = {units: :degrees, abbreviated: false, decimals: 5}
     CONVERSIONS          = {
-      :degrees  => 1.0,
-      :compass  => nil,
+      degrees:  1.0,
+      compass:  nil,
     }
 
     # Conversions
