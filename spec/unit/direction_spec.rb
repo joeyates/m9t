@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'spec_helper'
 require 'm9t/direction'
 
 describe M9t::Direction do

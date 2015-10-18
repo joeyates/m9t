@@ -1,4 +1,7 @@
+require "codeclimate-test-reporter"
 require 'rspec'
+
+CodeClimate::TestReporter.start
 
 if RUBY_PLATFORM != 'java'
   require 'simplecov'

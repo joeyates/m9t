@@ -1,5 +1,8 @@
-m9t [![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)][Continuous Integration]
-===
+[![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)][Continuous Integration]
+[![Source Analysis](https://codeclimate.com/github/joeyates/m9t/badges/gpa.svg)](https://codeclimate.com/github/joeyates/imap-backup)
+[![Test Coverage](https://codeclimate.com/github/joeyates/m9t/badges/coverage.svg)](https://codeclimate.com/github/joeyates/imap-backup/coverage)
+
+# m9t
 
 *Measurements and coversions library for Ruby*
 

@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'spec_helper'
 require 'm9t/speed'
 
 describe M9t::Speed do

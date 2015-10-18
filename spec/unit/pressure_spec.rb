@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'spec_helper'
 require 'm9t/pressure'
 
 describe M9t::Pressure do
