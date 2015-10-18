@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.unshift( File.dirname(__FILE__) + '/lib' )
+$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
 require 'm9t/version'
 
 gemspec = Gem::Specification.new do |s|
