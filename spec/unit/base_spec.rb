@@ -18,6 +18,16 @@ end
 class SomeDerivedMeasurement < SomeMeasurement; end
 
 describe M9t::Base do
+  describe '.respond_to?' do
+    it 'is true for conversion between known units' do
+      expect(SomeMeasurement.respond_to?(:foos_to_bars)).to be_truthy
+    end
+
+    it 'is false for unknown units' do
+      expect(SomeMeasurement.respond_to?(:bazs_to_bars)).to be_falsey
+    end
+  end
+
   describe '.method_missing' do
     it 'handles conversion between known units' do
       expect(SomeMeasurement.foos_to_bars(3.0)).to be_a(Float)
@@ -27,6 +37,24 @@ describe M9t::Base do
       expect {
         SomeMeasurement.bazs_to_bars(3.0)
       }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe '#respond_to?' do
+    subject { SomeMeasurement.new(3.0) }
+
+    it 'is true for conversion to known units' do
+      expect(subject.respond_to?(:to_bars)).to be_truthy
+    end
+
+    it 'is false for unknown units' do
+      expect(subject.respond_to?(:to_bazs)).to be_falsey
+    end
+
+    context 'for unrecognized calls' do
+      it 'calls super' do
+        expect(subject.respond_to?(:ciao)).to be_falsey
+      end
     end
   end
 
