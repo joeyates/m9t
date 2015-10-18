@@ -47,7 +47,7 @@ module M9t
 
       # Converts Fahrenheit to degrees
       def fahrenheit_to_degrees(fahrenheit)
-        fahrenheit.to_f - 32 * 5.0 / 9.0
+        (fahrenheit.to_f - 32) * 5.0 / 9.0
       end
 
     end
