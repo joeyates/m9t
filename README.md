@@ -1,6 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/joeyates/m9t.png)][Continuous Integration]
-[![Source Analysis](https://codeclimate.com/github/joeyates/m9t/badges/gpa.svg)](https://codeclimate.com/github/joeyates/imap-backup)
-[![Test Coverage](https://codeclimate.com/github/joeyates/m9t/badges/coverage.svg)](https://codeclimate.com/github/joeyates/imap-backup/coverage)
+[![Source Analysis](https://codeclimate.com/github/joeyates/m9t/badges/gpa.svg)](https://codeclimate.com/github/joeyates/m9t)
+[![Test Coverage](https://codeclimate.com/github/joeyates/m9t/badges/coverage.svg)](https://codeclimate.com/github/joeyates/m9t/coverage)
 
 # m9t
 
