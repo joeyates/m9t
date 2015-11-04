@@ -8,6 +8,11 @@ I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
 I18n.reload!
 
 # Monkey patch I18n
+# i18n does not handle localizing numbers.
+# See the following GitHub issues:
+# * https://github.com/svenfuchs/i18n/issues/328
+# * https://github.com/svenfuchs/i18n/issues/135
+# * https://github.com/svenfuchs/i18n/issues/183
 module I18n
   # Handle non-English numerical separators
   # with I18n.locale = :it,
