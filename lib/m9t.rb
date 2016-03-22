@@ -22,9 +22,9 @@
 #++
 
 # encoding: utf-8
+module M9t; end
+
 libs = %w(i18n base direction distance pressure speed temperature version)
 libs.each do |library|
   require "m9t/#{library}"
 end
-
-module M9t; end
