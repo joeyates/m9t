@@ -22,6 +22,7 @@
 #++
 
 # encoding: utf-8
+
 module M9t; end
 
 libs = %w(i18n base direction distance pressure speed temperature version)
