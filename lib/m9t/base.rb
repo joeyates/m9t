@@ -76,13 +76,13 @@ module M9t
           end
         end
 
-        # Returns the classes current options - see the specific class for
+        # Returns the class's current options - see the specific class for
         # defaults
         def options
           @options
         end
 
-        # Reloads the class' default options
+        # Reloads the class's default options
         def reset_options!
           @options = self::DEFAULT_OPTIONS.clone
         end
