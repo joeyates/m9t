@@ -37,6 +37,10 @@ describe M9t::Direction do
     it "handles values < 0" do
       expect(M9t::Direction.normalize(-355)).to eq(5)
     end
+
+    it "handles large values" do
+      M9t::Direction.normalize(1000000000)
+    end
   end
 
   context "conversion class methods" do

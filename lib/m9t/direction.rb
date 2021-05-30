@@ -38,13 +38,11 @@ module M9t
       # Reduce directions in degrees to the range [0, 360)
       #  M9t::Direction.normalize(1000) => 280.0
       def normalize(degrees)
-        case
-        when degrees < 0
-          normalize(degrees + CIRCLE)
-        when degrees >= CIRCLE
-          normalize(degrees - CIRCLE)
+        remainder = degrees.remainder(CIRCLE)
+        if remainder < 0
+          remainder + CIRCLE
         else
-          degrees
+          remainder
         end
       end
     end
