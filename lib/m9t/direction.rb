@@ -50,14 +50,14 @@ module M9t
     # Handles the special case where compass directions are the desired output.
     def to_s(options = {})
       if options[:units] == :compass
-        Direction.degrees_to_compass(@value)
+        Direction.degrees_to_compass(value)
       else
         super
       end
     end
 
     def to_compass
-      self.class.degrees_to_compass(@value)
+      self.class.degrees_to_compass(value)
     end
   end
 end
