@@ -89,7 +89,7 @@ describe M9t::Distance do
     end
 
     specify "units: kilometers" do
-      distance = M9t::Distance.new( 156003 )
+      distance = M9t::Distance.new(156003)
       expect(distance.to_s(precision: 1, units: :kilometers)).to eq("156.0 kilometers")
     end
 
