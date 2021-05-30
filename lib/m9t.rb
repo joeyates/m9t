@@ -1,5 +1,5 @@
 #--
-# Copyright (c) 2010 Joe Yates
+# Copyright (c) 2010-2021 Joe Yates
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
