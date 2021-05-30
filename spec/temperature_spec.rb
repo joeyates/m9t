@@ -1,6 +1,4 @@
-# encoding: utf-8
-require 'spec_helper'
-require 'm9t/temperature'
+require "m9t/temperature"
 
 describe M9t::Temperature do
   CONVERSIONS = [
@@ -8,36 +6,36 @@ describe M9t::Temperature do
     [:fahrenheit, 100, 212.0],
   ]
 
-  context 'constants' do
-    specify 'absolute zero' do
+  context "constants" do
+    specify "absolute zero" do
       expect(M9t::Temperature::ABSOLUTE_ZERO).to be_within(0.0001).of(-273.15)
     end
   end
 
-  context 'default options' do
-    specify 'units: meters' do
+  context "default options" do
+    specify "units: meters" do
       expect(M9t::Temperature.options[:units]).to eq(:degrees)
     end
 
-    specify 'precision: 5' do
+    specify "precision: 5" do
       expect(M9t::Temperature.options[:precision]).to eq(5)
     end
   end
 
-  context 'class methods' do
-    context '.new' do
-      it 'handles identity' do
+  context "class methods" do
+    context ".new" do
+      it "handles identity" do
         expect(M9t::Temperature.new(45.0).value).to eq(45.0)
       end
     end
 
-    context '.measurement_name' do
+    context ".measurement_name" do
       it "is 'temperature'" do
-        expect(M9t::Temperature.measurement_name).to eq('temperature')
+        expect(M9t::Temperature.measurement_name).to eq("temperature")
       end
     end
 
-    context 'conversion factories' do
+    context "conversion factories" do
       CONVERSIONS.each do |unit, degrees, other|
         specify ".#{unit}" do
           expect(M9t::Temperature.send(unit, other).value).
@@ -46,8 +44,8 @@ describe M9t::Temperature do
       end
     end
 
-    context 'conversions' do
-      context 'from degrees' do
+    context "conversions" do
+      context "from degrees" do
         CONVERSIONS.each do |unit, degrees, other|
           method = :"to_#{unit}"
           specify method do
@@ -56,7 +54,7 @@ describe M9t::Temperature do
         end
       end
 
-      context 'to degrees' do
+      context "to degrees" do
         CONVERSIONS.each do |unit, degrees, other|
           method = :"#{unit}_to_degrees"
           specify method do
@@ -67,8 +65,8 @@ describe M9t::Temperature do
     end
   end
 
-  context 'conversions' do
-    context 'from degrees' do
+  context "conversions" do
+    context "from degrees" do
       CONVERSIONS.each do |unit, degrees, other|
         subject { M9t::Temperature.new(degrees) }
 
@@ -80,48 +78,47 @@ describe M9t::Temperature do
     end
   end
 
-  context '#to_s' do
+  context "#to_s" do
     subject { M9t::Temperature.new(135) }
 
-    specify 'en' do
+    specify "en" do
       I18n.locale = :en
-      expect(subject.to_s).to eq('135.00000 degrees')
+      expect(subject.to_s).to eq("135.00000 degrees")
     end
 
-    specify 'it' do
+    specify "it" do
       I18n.locale = :it
-      expect(subject.to_s).to eq('135,00000 gradi')
+      expect(subject.to_s).to eq("135,00000 gradi")
     end
 
-    specify 'precision' do
+    specify "precision" do
       I18n.locale = :en
-      expect(subject.to_s(precision: 0)).to eq('135 degrees')
+      expect(subject.to_s(precision: 0)).to eq("135 degrees")
     end
 
-    specify 'abbreviated, en' do
+    specify "abbreviated, en" do
       I18n.locale = :en
       expect(subject.to_s(abbreviated: true, precision: 0)).
-        to eq('135°C')
+        to eq("135°C")
     end
 
-    specify 'kelvin, en' do
+    specify "kelvin, en" do
       I18n.locale = :en
       expect(subject.to_s(units: :kelvin, precision: 2)).
-        to eq('408.15 kelvin')
+        to eq("408.15 kelvin")
     end
 
-    specify 'kelvin, it' do
+    specify "kelvin, it" do
       I18n.locale = :it
       expect(subject.to_s(units: :kelvin, precision: 2)).
-        to eq('408,15 kelvin')
+        to eq("408,15 kelvin")
     end
 
-    specify 'abbreviated, kelvin, it' do
+    specify "abbreviated, kelvin, it" do
       I18n.locale = :it
       expect(
         subject.to_s(units: :kelvin, abbreviated: true, precision: 2)
-      ).to eq('408,15K')
+      ).to eq("408,15K")
     end
   end
 end
-

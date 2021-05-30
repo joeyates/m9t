@@ -1,6 +1,5 @@
-# encoding: utf-8
-require 'm9t/errors'
-require 'm9t/i18n'
+require "m9t/errors"
+require "m9t/i18n"
 
 module M9t
   module Base
@@ -82,15 +81,15 @@ module M9t
           @options
         end
 
-        # Reloads the class's default options
+        # Reloads the class"s default options
         def reset_options!
           @options = self::DEFAULT_OPTIONS.clone
         end
 
         # The name used for i18n translations
-        #  M9t::Distance => 'distance'
+        #  M9t::Distance => "distance"
         def measurement_name
-          name.split('::')[-1].downcase
+          name.split("::")[-1].downcase
         end
 
         def default_unit
@@ -145,20 +144,20 @@ module M9t
       key = i18n_key(options)
       unit = I18n.t(key, count: value_in_units)
 
-      "#{localized_value}%s#{unit}" % (options[:abbreviated] ? '' : ' ')
+      "#{localized_value}%s#{unit}" % (options[:abbreviated] ? "" : " ")
     end
 
     private
 
     def i18n_key(options = {})
-      key = 'units.' + self.class.measurement_name + '.' + options[:units].to_s
-      options[:abbreviated] ? key += '.abbreviated' : key += '.full'
+      key = "units.#{self.class.measurement_name}.#{options[:units]}"
+      key += options[:abbreviated] ? ".abbreviated" : ".full"
       key
     end
 
     def units_error(units)
-      known = self.class::CONVERSIONS.keys.collect(&:to_s).join(', ')
-      fail M9t::UnitError, "Unknown units '#{units}'. Known: #{known}"
+      known = self.class::CONVERSIONS.keys.collect(&:to_s).join(", ")
+      fail M9t::UnitError, %Q(Unknown units "#{units}". Known: #{known})
     end
 
     def extract_to(name)

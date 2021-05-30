@@ -1,16 +1,14 @@
-# encoding: utf-8
-require 'spec_helper'
-require 'm9t/pressure'
+require "m9t/pressure"
 
 describe M9t::Pressure do
-  context 'class methods' do
-    context '.new' do
-      it 'returns the identity' do
+  context "class methods" do
+    context ".new" do
+      it "returns the identity" do
         expect(M9t::Pressure.new(1.0).value).to eq(1.0)
       end
     end
 
-    context 'other units' do
+    context "other units" do
       [
         [:hectopascals, 0.001],
         [:inches_of_mercury, 0.03386],
@@ -22,4 +20,3 @@ describe M9t::Pressure do
     end
   end
 end
-

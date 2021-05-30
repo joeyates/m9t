@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gemspec :name => 'm9t'
-
+gemspec name: "m9t"

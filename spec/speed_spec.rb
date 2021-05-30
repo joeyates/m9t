@@ -1,16 +1,14 @@
-# encoding: utf-8
-require 'spec_helper'
-require 'm9t/speed'
+require "m9t/speed"
 
 describe M9t::Speed do
-  context 'conversion constants' do
-    it 'has knots' do
+  context "conversion constants" do
+    it "has knots" do
       expect(M9t::Speed::KNOTS).to be_within(0.0001).of(1.9438)
     end
   end
 
-  context 'known units' do
-    it 'gives an error for unknown units' do
+  context "known units" do
+    it "gives an error for unknown units" do
       speed = M9t::Speed.new(10)
       expect {
         speed.to_s(units: :foos)
@@ -18,20 +16,20 @@ describe M9t::Speed do
     end
   end
 
-  context 'class methods' do
-    context '.new' do
-      it 'handles identity' do
+  context "class methods" do
+    context ".new" do
+      it "handles identity" do
         expect(M9t::Speed.new(45).value).to eq(45)
       end
     end
 
-    context '.measurement_name' do
+    context ".measurement_name" do
       it "is 'speed'" do
-        expect(M9t::Speed.measurement_name).to eq('speed')
+        expect(M9t::Speed.measurement_name).to eq("speed")
       end
     end
 
-    context 'conversion factories' do
+    context "conversion factories" do
       [
         [:kilometers_per_hour, 0.2778],
         [:miles_per_hour, 0.447],
@@ -43,7 +41,7 @@ describe M9t::Speed do
       end
     end
 
-    context 'conversions' do
+    context "conversions" do
       [
         [:meters_per_second, :miles_per_hour, 45.0, 100.6621],
       ].each do |from, to, input, expected|
@@ -55,7 +53,7 @@ describe M9t::Speed do
     end
   end
 
-  context 'conversions' do
+  context "conversions" do
     subject { M9t::Speed.new(45) }
 
     [
@@ -69,37 +67,36 @@ describe M9t::Speed do
     end
   end
 
-  context '#to_s' do
+  context "#to_s" do
     subject { M9t::Speed.new(135.0) }
 
-    specify 'full en' do
+    specify "full en" do
       I18n.locale = :en
-      expect(subject.to_s).to eq('135.00000 meters per second')
+      expect(subject.to_s).to eq("135.00000 meters per second")
     end
 
-    specify 'full it' do
+    specify "full it" do
       I18n.locale = :it
-      expect(subject.to_s).to eq('135,00000 metri al second')
+      expect(subject.to_s).to eq("135,00000 metri al second")
     end
 
-    specify 'precision' do
+    specify "precision" do
       I18n.locale = :en
-      expect(subject.to_s(precision: 0)).to eq('135 meters per second')
+      expect(subject.to_s(precision: 0)).to eq("135 meters per second")
     end
 
-    specify 'abbreviated' do
-      expect(subject.to_s(abbreviated: true, precision: 0)).to eq('135m/s')
+    specify "abbreviated" do
+      expect(subject.to_s(abbreviated: true, precision: 0)).to eq("135m/s")
     end
 
-    specify 'units: knots, en' do
+    specify "units: knots, en" do
       I18n.locale = :en
-      expect(subject.to_s(units: :knots, precision: 0)).to eq('262 knots')
+      expect(subject.to_s(units: :knots, precision: 0)).to eq("262 knots")
     end
 
-    specify 'units: knots, it' do
+    specify "units: knots, it" do
       I18n.locale = :it
-      expect(subject.to_s(units: :knots, precision: 0)).to eq('262 nodi')
+      expect(subject.to_s(units: :knots, precision: 0)).to eq("262 nodi")
     end
   end
 end
-

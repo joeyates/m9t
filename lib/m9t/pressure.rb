@@ -1,5 +1,4 @@
-# encoding: utf-8
-require 'm9t/base'
+require "m9t/base"
 
 module M9t
   # Represents atmospheric (or other) pressure

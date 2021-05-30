@@ -1,6 +1,5 @@
-# encoding: utf-8
-require 'm9t/base'
-require 'm9t/distance'
+require "m9t/base"
+require "m9t/distance"
 
 module M9t
   # Represents a speed
