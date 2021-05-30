@@ -28,7 +28,7 @@ module M9t
       end
 
       # Accepts a localized compass direction (e.g. "N") and returns the equivalent M9t::Direction
-      #  M9t::Direction.compass("NE") => #<M9t::Direction:0xb76cc750 @value=45.0, @options={:units=>:degrees, :decimals=>5, :abbreviated=>false}>
+      #  M9t::Direction.compass("NE") => #<M9t::Direction:0x000000014a438618 @value=45.0>
       def compass(compass_direction)
         sector = I18n.t(self.measurement_name + ".sectors").find_index(compass_direction)
         raise "Compass direction '#{compass_direction}' not recognised" if sector.nil?
