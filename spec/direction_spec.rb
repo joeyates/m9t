@@ -30,12 +30,20 @@ describe M9t::Direction do
   end
 
   describe ".normalize" do
-    it "handles values > 360" do
+    it "reduces number greater than 360" do
       expect(M9t::Direction.normalize(725)).to eq(5)
     end
 
-    it "handles values < 0" do
+    it "reduces 360" do
+      expect(M9t::Direction.normalize(360)).to eq(0)
+    end
+
+    it "increases numbers less than zero" do
       expect(M9t::Direction.normalize(-355)).to eq(5)
+    end
+
+    it "handles values with decimals" do
+      expect(M9t::Direction.normalize(360.5)).to eq(0.5)
     end
 
     it "handles large values" do
