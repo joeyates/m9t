@@ -5,7 +5,7 @@ gemspec = Gem::Specification.new do |s|
   s.name          = "m9t"
   s.platform      = Gem::Platform::RUBY
   s.version       = M9t::VERSION::STRING
-  s.required_ruby_version = ">= 1.9.3"
+  s.required_ruby_version = ">= 2.4.0"
 
   s.summary       = "Measurements and conversions library for Ruby"
   s.description   = "Classes for handling basic measurement units: distance, direction, speed, temperature and pressure"
